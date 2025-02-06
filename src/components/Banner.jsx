@@ -3,7 +3,7 @@ import ai from "../assets/ai3.png";
 const Banner = () => {
   return (
     <div className="w-full h-auto animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards">
-      <h1 className="dark:text-white text-3xl sm:text-5xl md:text-6xl font-sans text-center w-auto md:w-[40rem] mx-auto animate-fade-up">
+      <h1 className="dark:text-white text-3xl sm:text-5xl md:text-6xl font-sans text-center w-auto md:w-[40rem] mx-auto animate-fade-up max-md:mt-8 ">
         Your Mental Health Matter
       </h1>
       <div className="w-full h-auto md:flex justify-between items-center">
