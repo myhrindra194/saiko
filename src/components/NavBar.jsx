@@ -26,22 +26,22 @@ const NavBar = ({ handleToogleTheme, theme }) => {
           <div className="sm:hidden flex items-center">
             <button
               onClick={handleToogleTheme}
-              className="text-purple-500 p-2 mr-3"
+              className="text-purple-500 p-1.5 mr-3 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-full"
             >
               {theme === "dark" ? (
-                <SunIcon className="size-6" />
+                <SunIcon className="size-7" />
               ) : (
-                <MoonIcon className="size-6" />
+                <MoonIcon className="size-7" />
               )}
             </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-purple-500 p-2"
+              className="text-purple-500 p-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-full"
             >
               {isMenuOpen ? (
-                <XMarkIcon className="size-8 " />
+                <XMarkIcon className="size-7 " />
               ) : (
-                <Bars3Icon className="size-8 " />
+                <Bars3Icon className="size-7" />
               )}
             </button>
           </div>
@@ -62,12 +62,12 @@ const NavBar = ({ handleToogleTheme, theme }) => {
             </ul>
             <button
               onClick={handleToogleTheme}
-              className="text-purple-500 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 p-2 rounded-full"
+              className="text-purple-500 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 p-1.5 rounded-full"
             >
               {theme === "dark" ? (
-                <SunIcon className="size-8" />
+                <SunIcon className="size-6" />
               ) : (
-                <MoonIcon className="size-8" />
+                <MoonIcon className="size-6" />
               )}
             </button>
           </section>

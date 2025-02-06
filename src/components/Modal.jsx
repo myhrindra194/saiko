@@ -10,10 +10,10 @@ const Modal = ({ closeModal }) => {
 
   return (
     <div className="fixed inset-0 bg-slate-300/10 backdrop-blur-xl flex items-center justify-center z-50">
-      <div className="bg-slate-100 dark:bg-slate-700 dark:text-slate-200 p-8 rounded-lg w-96">
+      <div className="bg-slate-100 dark:bg-slate-700 dark:text-slate-200 p-8 rounded-lg w-96 max-sm:mx-5">
         <div className="flex justify-between">
           <h2 className="text-xl mb-4">Login</h2>
-          <XMarkIcon className="h-6 w-6 cursor-pointer" onClick={closeModal} />
+          <XMarkIcon className="size-6 cursor-pointer" onClick={closeModal} />
         </div>
         <form>
           <div className="mb-4">
@@ -55,7 +55,7 @@ const Modal = ({ closeModal }) => {
           </div>
           <button
             type="submit"
-            className="w-full bg-purple-700 text-white p-2 rounded-lg hover:bg-purple-600 hover:ring-1 hover:ring-purple-500 font-medium"
+            className="w-full bg-purple-700 text-white p-2 rounded-lg hover:bg-purple-600 hover:ring-1 hover:ring-purple-500 "
           >
             Login
           </button>
