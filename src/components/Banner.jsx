@@ -1,10 +1,10 @@
-import ai from "../assets/ai3.png";
+import ai from "../assets/ai4.png";
 
 const Banner = () => {
   return (
     <div className="w-full h-auto animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards">
-      <h1 className="dark:text-white text-3xl sm:text-5xl md:text-6xl font-sans text-center w-auto md:w-[40rem] mx-auto animate-fade-up max-md:mt-8 ">
-        Your Mental Health Matter
+      <h1 className="dark:text-white text-3xl sm:text-5xl md:text-6xl font-sans text-center w-auto md:w-[40rem] mx-auto animate-fade-up max-md:mt-8">
+        Your Mental Health Matters
       </h1>
       <div className="w-full h-auto md:flex justify-between items-center">
         <div className="md:w-50 mt-10 text-center md:text-start">
@@ -21,10 +21,10 @@ const Banner = () => {
         </div>
         <div className="md:flex flex-col md:w-50 mt-8 text-center text-lg md:text-end animate-fade-left">
           <h3>
-            There&apos;s <strong>hope</strong> when your
-            <strong> brain </strong> tell&apos;s there isn&apos;t
+            There&apos;s <strong>hope</strong> when your <strong>brain</strong>{" "}
+            tells you there isn&apos;t
           </h3>
-          <p className=" mt-20">
+          <p className="mt-20">
             Each day we learn the griefs and tribulations which affect our
             constituents or ourselves
           </p>

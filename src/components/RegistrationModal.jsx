@@ -1,21 +1,32 @@
 /* eslint-disable react/prop-types */
-import { EyeSlashIcon, XMarkIcon } from "@heroicons/react/16/solid";
-import { EyeIcon } from "@heroicons/react/20/solid";
+import { EyeIcon, EyeSlashIcon, XMarkIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 
-const Modal = ({ closeModal }) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+const RegistrationModal = ({ closeModal, openLoginModal }) => {
+  const [user, setUser] = useState({ email: "", username: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="fixed inset-0 bg-slate-300/10 backdrop-blur-xl flex items-center justify-center z-50">
       <div className="bg-slate-100 dark:bg-slate-700 dark:text-slate-200 p-8 rounded-lg w-96 max-sm:mx-5">
         <div className="flex justify-between">
-          <h2 className="text-xl mb-4">Login</h2>
+          <h2 className="text-xl mb-4">Registration</h2>
           <XMarkIcon className="size-6 cursor-pointer" onClick={closeModal} />
         </div>
         <form>
+          <div className="mb-4">
+            <label className="block text-sm" htmlFor="email">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="w-full p-2 border border-gray-300 dark:border-gray-500 rounded mt-2 outline-purple-600 dark:outline-slate-200"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+              required
+            />
+          </div>
           <div className="mb-4">
             <label className="block text-sm" htmlFor="username">
               Username
@@ -24,8 +35,8 @@ const Modal = ({ closeModal }) => {
               type="text"
               id="username"
               className="w-full p-2 border border-gray-300 dark:border-gray-500 rounded mt-2 outline-purple-600 dark:outline-slate-200"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={user.username}
+              onChange={(e) => setUser({ ...user, username: e.target.value })}
               required
             />
           </div>
@@ -37,8 +48,8 @@ const Modal = ({ closeModal }) => {
               type={showPassword ? "text" : "password"}
               id="password"
               className="w-full p-2 border border-gray-300 dark:border-gray-500 rounded mt-2 outline-purple-600 dark:outline-slate-200"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={user.password}
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
               required
             />
             <button
@@ -55,21 +66,20 @@ const Modal = ({ closeModal }) => {
           </div>
           <button
             type="submit"
-            className="w-full bg-purple-700 text-white p-2 rounded-lg hover:bg-purple-600 hover:ring-1 hover:ring-purple-500 "
+            className="w-full bg-purple-700 text-white p-2 rounded-lg hover:bg-purple-600 hover:ring-1 hover:ring-purple-500"
           >
-            Login
+            Register
           </button>
         </form>
-
         <p className="mt-5 text-center">
-          Do not have an account?{" "}
-          <a href="#" className="text-blue-500">
-            Sign up
-          </a>
+          Already have an account?{" "}
+          <button onClick={openLoginModal} className="text-blue-500">
+            Sign in
+          </button>
         </p>
       </div>
     </div>
   );
 };
 
-export default Modal;
+export default RegistrationModal;
