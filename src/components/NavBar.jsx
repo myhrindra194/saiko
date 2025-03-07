@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import { createPortal } from "react-dom";
+import { NavLink } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import LoginModal from "./LoginModal";
 import RegistrationModal from "./RegistrationModal";
@@ -44,7 +45,9 @@ const NavBar = () => {
 
       <nav className="w-full h-auto font-semibold animate-fade-down animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards">
         <div className="my-3 flex justify-between items-center">
-          <p className="font-semibold font-serif text-2xl">SaÏko</p>
+          <NavLink to="/" className="font-semibold font-serif text-2xl">
+            SaÏko
+          </NavLink>
           <div className="sm:hidden flex items-center">
             <button
               onClick={toggleTheme}
@@ -69,12 +72,18 @@ const NavBar = () => {
           </div>
           <section className="sm:flex items-center gap-10 hidden">
             <ul className="flex gap-5 font-light text-sm">
-              <li className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer">
+              <NavLink
+                to="/about"
+                className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer"
+              >
                 ABOUT US
-              </li>
-              <li className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer">
+              </NavLink>
+              <NavLink
+                to="/"
+                className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer"
+              >
                 GET INVOLVED
-              </li>
+              </NavLink>
               <li
                 className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer"
                 onClick={() => setShowRegisterModal(true)}
@@ -104,24 +113,27 @@ const NavBar = () => {
         {isMenuOpen && (
           <div className="sm:hidden flex flex-col gap-3 items-center py-4 rounded-lg w-full">
             <ul className="flex flex-col gap-3 text-white font-medium text-center w-full">
-              <li className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer">
+              <NavLink
+                to="/about"
+                className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer"
+              >
                 ABOUT US
-              </li>
-              <li className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer">
+              </NavLink>
+              <NavLink className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer">
                 GET INVOLVED
-              </li>
-              <li
+              </NavLink>
+              <NavLink
                 className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer"
                 onClick={() => setShowRegisterModal(true)}
               >
                 SIGN UP
-              </li>
-              <li
+              </NavLink>
+              <NavLink
                 className="px-3 py-1.5 rounded-xl border-purple-600 bg-purple-600 text-white cursor-pointer"
                 onClick={() => setShowLoginModal(true)}
               >
                 LOGIN
-              </li>
+              </NavLink>
             </ul>
           </div>
         )}

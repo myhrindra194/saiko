@@ -12,7 +12,7 @@ const Banner = () => {
             You <strong>don&apos;t</strong> have to <strong>struggle</strong> in
             silence
           </h3>
-          <button className="mt-5 text-lg font-semibold border-2 border-purple-600 px-4 py-1 rounded-2xl hover:bg-purple-600 hover:text-white">
+          <button className="mt-5 text-lg font-semibold border-2 border-purple-600 px-4 py-1 rounded-2xl hover:bg-purple-600 hover:text-white animate-fade-right">
             Learn more
           </button>
         </div>
