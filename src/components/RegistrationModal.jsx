@@ -1,14 +1,30 @@
 /* eslint-disable react/prop-types */
 import { EyeIcon, EyeSlashIcon, XMarkIcon } from "@heroicons/react/16/solid";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const RegistrationModal = ({ closeModal, openLoginModal }) => {
   const [user, setUser] = useState({ email: "", username: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        closeModal();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [closeModal]);
 
   return (
-    <div className="fixed inset-0 bg-slate-300/10 backdrop-blur-xl flex items-center justify-center z-50">
-      <div className="bg-slate-100 dark:bg-slate-700 dark:text-slate-200 p-8 rounded-lg w-96 max-sm:mx-5">
+    <div className="fixed inset-0 bg-slate-900/10 backdrop-blur-xl flex items-center justify-center z-50">
+      <div
+        ref={modalRef}
+        className="bg-slate-100 dark:bg-slate-700 dark:text-slate-200 p-8 rounded-lg w-96 max-sm:mx-5"
+      >
         <div className="flex justify-between">
           <h2 className="text-xl mb-4">Registration</h2>
           <XMarkIcon className="size-6 cursor-pointer" onClick={closeModal} />

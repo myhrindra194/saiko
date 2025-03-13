@@ -78,11 +78,12 @@ const NavBar = () => {
               >
                 ABOUT US
               </NavLink>
+
               <NavLink
                 to="/"
                 className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer"
               >
-                GET INVOLVED
+                BLOG
               </NavLink>
               <li
                 className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer"
@@ -119,8 +120,11 @@ const NavBar = () => {
               >
                 ABOUT US
               </NavLink>
-              <NavLink className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer">
-                GET INVOLVED
+              <NavLink
+                to="/"
+                className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer"
+              >
+                BLOG
               </NavLink>
               <NavLink
                 className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer"

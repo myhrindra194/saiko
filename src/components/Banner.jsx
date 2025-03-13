@@ -1,8 +1,9 @@
+import { NavLink } from "react-router";
 import ai from "../assets/ai4.png";
 
 const Banner = () => {
   return (
-    <div className="w-full h-auto animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards">
+    <div className="w-full h-auto animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards ">
       <h1 className="dark:text-white text-3xl sm:text-5xl md:text-6xl font-sans text-center w-auto md:w-[40rem] mx-auto animate-fade-up max-md:mt-8">
         Your Mental Health Matters
       </h1>
@@ -12,11 +13,11 @@ const Banner = () => {
             You <strong>don&apos;t</strong> have to <strong>struggle</strong> in
             silence
           </h3>
-          <button className="mt-5 text-lg font-semibold border-2 border-purple-600 px-4 py-1 rounded-2xl hover:bg-purple-600 hover:text-white animate-fade-right">
-            Learn more
+          <button className="mt-5 text-lg font-medium border-2 border-purple-600 px-4 py-1 rounded-2xl hover:bg-purple-600 hover:text-white animate-fade-right">
+            <NavLink to="/about">Learn more</NavLink>
           </button>
         </div>
-        <div className="flex justify-center mt-6 md:mt-0">
+        <div className="flex justify-center md:mt-0">
           <img src={ai} alt="robot" className="animate-fade-up" />
         </div>
         <div className="md:flex flex-col md:w-50 mt-8 text-center text-lg md:text-end animate-fade-left">
