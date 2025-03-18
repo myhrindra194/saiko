@@ -1,8 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import Root from "./components/Root.jsx";
-import { AuthProvider } from "./hooks/useAuth.jsx";
-import About from "./views/About.jsx";
-import Home from "./views/Home.jsx";
+import { ThemeProvider } from "./hooks/useTheme.jsx";
+import Root from "./layout/Root.jsx";
+import About from "./pages/About.jsx";
+import Blog from "./pages/Blog.jsx";
+import Home from "./pages/Home.jsx";
+import Service from "./pages/Service.jsx";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -18,14 +20,22 @@ const App = () => {
           path: "/about",
           element: <About />,
         },
+        {
+          path: "/service",
+          element: <Service />,
+        },
+        {
+          path: "/blog",
+          element: <Blog />,
+        },
       ],
     },
   ]);
 
   return (
-    <AuthProvider>
+    <ThemeProvider>
       <RouterProvider router={router} />
-    </AuthProvider>
+    </ThemeProvider>
   );
 };
 

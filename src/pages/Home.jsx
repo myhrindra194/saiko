@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Banner from "../components/Banner";
+import Banner from "../layout/Banner";
 
 const Home = () => {
   useEffect(() => {

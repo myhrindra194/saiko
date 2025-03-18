@@ -2,7 +2,7 @@ import about from "../assets/about.png";
 
 const About = () => {
   return (
-    <div className="flex flex-col lg:flex-row justify-between items-end">
+    <div className="flex flex-col lg:flex-row justify-between items-end md:px-20 px-8">
       <section className="h-full pt-10 sm:py-40 lg:py-15 xl:py-30 animate-fade-right animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forward">
         <h2 className="text-2xl sm:text-4xl md:text-5xl xl:text-6xl font-medium">
           SaÏko : Your Partner for{" "}

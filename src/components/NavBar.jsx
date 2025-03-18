@@ -7,12 +7,12 @@ import {
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { NavLink } from "react-router";
-import { useAuth } from "../hooks/useAuth";
-import LoginModal from "./LoginModal";
-import RegistrationModal from "./RegistrationModal";
+import { useTheme } from "../hooks/useTheme";
+import LoginModal from "../layout/LoginModal";
+import RegistrationModal from "../layout/RegistrationModal";
 
 const NavBar = () => {
-  const { theme, toggleTheme } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,7 +43,7 @@ const NavBar = () => {
           document.body
         )}
 
-      <nav className="w-full h-auto font-semibold animate-fade-down animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards">
+      <nav className="w-full h-auto font-semibold animate-fade-down animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards md:px-20 px-8">
         <div className="my-3 flex justify-between items-center">
           <NavLink to="/" className="font-semibold font-serif text-2xl">
             SaÏko
@@ -70,18 +70,36 @@ const NavBar = () => {
               )}
             </button>
           </div>
-          <section className="sm:flex items-center gap-10 hidden">
+          <section className="sm:flex items-center gap-4 hidden">
             <ul className="flex gap-5 font-light text-sm">
               <NavLink
                 to="/about"
-                className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer"
+                className={({ isActive }) =>
+                  `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
+                    isActive ? "text-purple-600" : "text-inherit"
+                  }`
+                }
               >
                 ABOUT US
               </NavLink>
+              <NavLink
+                to="/service"
+                className={({ isActive }) =>
+                  `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
+                    isActive ? "text-purple-600" : "text-inherit"
+                  }`
+                }
+              >
+                SERVICE
+              </NavLink>
 
               <NavLink
-                to="/"
-                className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer"
+                to="/blog"
+                className={({ isActive }) =>
+                  `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
+                    isActive ? "text-purple-600" : "text-inherit"
+                  }`
+                }
               >
                 BLOG
               </NavLink>
@@ -116,13 +134,31 @@ const NavBar = () => {
             <ul className="flex flex-col gap-3 text-white font-medium text-center w-full">
               <NavLink
                 to="/about"
-                className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer"
+                className={({ isActive }) =>
+                  `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer ${
+                    isActive ? "text-purple-600" : "text-inherit"
+                  }`
+                }
               >
                 ABOUT US
               </NavLink>
               <NavLink
+                to="/services"
+                className={({ isActive }) =>
+                  `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer ${
+                    isActive ? "text-purple-600" : "text-inherit"
+                  }`
+                }
+              >
+                SERVICE
+              </NavLink>
+              <NavLink
                 to="/"
-                className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer"
+                className={({ isActive }) =>
+                  `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
+                    isActive ? "text-purple-600" : "text-inherit"
+                  }`
+                }
               >
                 BLOG
               </NavLink>
