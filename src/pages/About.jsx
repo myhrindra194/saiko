@@ -11,7 +11,7 @@ const About = () => {
         <div className="flex flex-row mt-10">
           <div className="w-20 lg:w-28  h-0.5 dark:bg-white bg-slate-800"></div>
           <div>
-            <p className="text-base lg:text-lg ms-4 lg:ms-20 -translate-y-3 lg:max-w-lg xl:max-w-2xl">
+            <p className="text-base lg:text-lg ms-4 lg:ms-20 -translate-y-3 lg:max-w-lg xl:max-w-2xl ">
               Discover a comprehensive online platform dedicated to your mental
               well-being. We offer inspiring resources, expert advice and a
               supportive community to help you navigate life&apos;s challenges.

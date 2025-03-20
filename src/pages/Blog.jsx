@@ -2,6 +2,7 @@ import { ArrowUpIcon } from "@heroicons/react/24/solid";
 import { useEffect, useRef, useState } from "react";
 import Loader from "../components/Loader";
 import PostCard from "../components/PostCard";
+import { sortPostsByDate } from "../utils/function";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -31,6 +32,7 @@ const Blog = () => {
   }, []);
 
   useEffect(() => {
+    const currentObserverTarget = observerTarget.current;
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -40,13 +42,13 @@ const Blog = () => {
       { threshold: 1 }
     );
 
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
+    if (currentObserverTarget) {
+      observer.observe(currentObserverTarget);
     }
 
     return () => {
-      if (observerTarget.current) {
-        observer.unobserve(observerTarget.current);
+      if (currentObserverTarget) {
+        observer.unobserve(currentObserverTarget);
       }
     };
   }, []);
@@ -67,13 +69,10 @@ const Blog = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setShowScrollButton(true);
-      } else {
-        setShowScrollButton(false);
-      }
+      window.scrollY > 200
+        ? setShowScrollButton(true)
+        : setShowScrollButton(false);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -82,14 +81,6 @@ const Blog = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
-    });
-  };
-
-  const sortPostsByDate = (posts, order) => {
-    return [...posts].sort((a, b) => {
-      const dateA = new Date(a.publishedAt);
-      const dateB = new Date(b.publishedAt);
-      return order === "recent" ? dateB - dateA : dateA - dateB;
     });
   };
 
@@ -114,12 +105,12 @@ const Blog = () => {
   const sources = [...new Set(posts.map((post) => post.source.name))];
 
   return (
-    <div className="md:px-20 px-8 relative pt-3 md:pt-5">
-      <div className="flex flex-wrap gap-4 mb-6">
+    <div className="md:px-20 px-8 relative py-4 md:pt-5">
+      <div className="flex flex-wrap gap-4 my-5">
         <select
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 focus:outline-none"
+          className="p-2.5 rounded-lg bg-white/70 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:ring-purple-500 focus:border-purple-500"
         >
           <option value="recent">Recent</option>
           <option value="oldest">Oldest</option>
@@ -128,7 +119,7 @@ const Blog = () => {
         <select
           value={selectedSource}
           onChange={(e) => setSelectedSource(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-gray-200 text-gray-700 focus:outline-none"
+          className="p-2.5 rounded-lg bg-white/70 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:ring-purple-500 focus:border-purple-500"
         >
           <option value="all">All ressources</option>
           {sources.map((source) => (
@@ -158,7 +149,7 @@ const Blog = () => {
       {showScrollButton && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-2 bg-purple-500 text-white rounded-full shadow-lg hover:bg-purple-600 transition-colors"
+          className="fixed bottom-8 right-8 p-3 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 bg-purple-500 hover:bg-purple-600 text-white"
         >
           <ArrowUpIcon className="w-6 h-6" />
         </button>

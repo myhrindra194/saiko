@@ -7,7 +7,7 @@ const PostCard = ({ post }) => {
   const cleanedContent = cleanContent(sanitizedContent);
 
   return (
-    <div className="bg-gray-200/20 dark:bg-gray-800/30 shadow-sm rounded-lg p-4 border border-gray-200  dark:border-gray-700 group">
+    <div className="p-6 rounded-lg shadow-lg bg-white/50 hover:bg-white/70 dark:bg-slate-800/50 dark:hover:bg-slate-700/50 border border-gray-200 dark:border-slate-700 group">
       <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
           <img
@@ -26,7 +26,7 @@ const PostCard = ({ post }) => {
                 href={post.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-blue-500 hover:text-blue-600"
+                className="text-xs text-purple-500 hover:text-purple-600"
               >
                 Read article
               </a>

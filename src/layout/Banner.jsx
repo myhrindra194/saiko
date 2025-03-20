@@ -4,7 +4,7 @@ import Button from "../components/Button";
 
 const Banner = () => {
   return (
-    <div className="w-full h-auto animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards md:px-20 px-8">
+    <div className="w-full h-auto animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards md:px-20 px-8 mt-6">
       <h1 className="dark:text-white text-3xl sm:text-5xl md:text-6xl font-sans text-center w-auto md:w-[40rem] mx-auto animate-fade-up max-md:mt-8">
         Your Mental Health Matters
       </h1>

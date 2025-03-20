@@ -2,41 +2,7 @@
 @import "tailwindcss-animated";
 @custom-variant dark (&:where(.dark, .dark *));
 
-.perspective-container {
-  perspective: 100vw; 
-}
-.bg-retro-grid {
-  background:
-    linear-gradient(to right, #e0e7ff 1px, transparent 1px),
-    linear-gradient(to bottom, #e0e7ff 1px, transparent 1px);
-  background-size: 20vw 25vh;
-  opacity: 0.5;
-}
 
-.bg-retro-grid-dark {
-  background:
-    linear-gradient(to right, #4c1d95 1px, transparent 1px),
-    linear-gradient(to bottom, #4c1d95 1px, transparent 1px);
-  background-size: 20vw 25vh;
-  opacity: 0.5;
-}
-
-@keyframes move-grid {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 800px 900px;
-  }
-}
-
-.bg-retro-grid,
-.bg-retro-grid-dark {
-  animation: move-grid 1000s linear infinite;
-  transform: rotateX(90deg); 
-  transform-origin: center bottom;
-
-}
 
 
 @keyframes gradient-move {
