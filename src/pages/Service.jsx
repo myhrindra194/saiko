@@ -2,11 +2,9 @@ import { features } from "../utils/data";
 
 const Service = () => {
   return (
-    <div className="py-10 flex flex-col items-center justify-center px-8 md:px-20 animate-fade-up animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards">
-      <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-center">
-        Our Services
-      </h1>
-      <p className="text-lg text-center mb-12 max-w-2xl">
+    <div className="py-10 flex flex-col justify-center px-8 md:px-20 animate-fade-up animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards">
+      <h1 className="text-4xl sm:text-5xl font-bold mb-4 ">Our Services</h1>
+      <p className="mb-12 max-w-2xl">
         Discover our comprehensive mental health solutions designed to support
         you every step of the way.
       </p>
