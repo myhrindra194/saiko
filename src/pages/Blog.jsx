@@ -19,44 +19,20 @@ const Blog = () => {
     const fetchNews = async () => {
       setLoading(true);
       try {
-        const response = await fetch(
-          `https://newsapi.org/v2/everything?q=mental%20health&language=en&apiKey=${
-            import.meta.env.VITE_NEWSAPI_API_KEY
-          }`,
-          {
-            headers: {
-              Accept: "application/json",
-              "X-Api-Key": import.meta.env.VITE_NEWSAPI_API_KEY,
-            },
-          }
-        );
+        const response = await fetch(import.meta.env.VITE_NEWSAPI_PROXY_URL);
 
-        // Vérifiez d'abord le content-type
-        const contentType = response.headers.get("content-type");
-        if (!contentType?.includes("application/json")) {
-          const errorText = await response.text();
-          throw new Error(
-            `Réponse invalide: ${errorText.substring(0, 100)}...`
-          );
-        }
+        if (!response.ok) throw new Error("Network response not OK");
 
         const data = await response.json();
-
-        if (!data.articles) {
-          throw new Error("Format de données invalide");
-        }
-
         setPosts(data.articles || []);
-        setVisiblePosts(data.articles.slice(0, postsPerPage));
       } catch (error) {
-        console.error("Erreur fetch:", error);
-        // Fallback pour le développement
+        console.error("Error:", error);
+        // Fallback UI
         setPosts([
           {
-            title: "Actualités temporairement indisponibles",
+            title: "Actualités non disponibles",
             description: error.message,
             source: { name: "Système" },
-            publishedAt: new Date().toISOString(),
           },
         ]);
       } finally {
