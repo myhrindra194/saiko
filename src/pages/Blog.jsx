@@ -16,31 +16,25 @@ const Blog = () => {
   const observerTarget = useRef(null);
 
   useEffect(() => {
-    const fetchNews = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(import.meta.env.VITE_NEWSAPI_PROXY_URL);
-
-        if (!response.ok) throw new Error("Network response not OK");
-
-        const data = await response.json();
+    let uri =
+      "https://newsapi.org/v2/everything?q=mental%20health&language=en&sortBy=publishedAt&apiKey=";
+    fetch(`${uri}${import.meta.env.VITE_NEWSAPI_API_KEY}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then((data) => {
+        if (!data.articles || !Array.isArray(data.articles)) {
+          throw new Error("Invalid data format: articles is not an array");
+        }
         setPosts(data.articles || []);
-      } catch (error) {
-        console.error("Error:", error);
-        // Fallback UI
-        setPosts([
-          {
-            title: "Actualités non disponibles",
-            description: error.message,
-            source: { name: "Système" },
-          },
-        ]);
-      } finally {
+        setVisiblePosts(data.articles.slice(0, postsPerPage));
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+        setPosts([]);
         setLoading(false);
-      }
-    };
-
-    fetchNews();
+      });
   }, []);
 
   useEffect(() => {
