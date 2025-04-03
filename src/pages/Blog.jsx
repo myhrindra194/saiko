@@ -105,7 +105,7 @@ const Blog = () => {
   const sources = [...new Set(posts.map((post) => post.source.name))];
 
   return (
-    <div className="md:px-20 px-8 relative py-4 md:pt-5">
+    <div className="md:px-20 px-8 relative py-4 md:pt-5 mt-20">
       <div className="flex flex-wrap gap-4 my-5">
         <select
           value={filter}

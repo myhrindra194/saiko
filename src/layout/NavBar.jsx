@@ -58,7 +58,7 @@ const NavBar = () => {
           document.body
         )}
 
-      <nav className="w-full h-auto font-semibold  md:px-20 px-8 py-2 dark:border-b-slate-600/40 border-b-slate-200/40 border-b sticky top-0 bg-transparent z-50 backdrop-blur-3xl">
+      <nav className="w-full h-auto font-semibold  md:px-20 px-8 py-2 dark:border-b-slate-600/40 border-b-slate-200/40 border-b fixed top-0 bg-transparent z-50 backdrop-blur-3xl">
         <div className="flex items-center relative">
           <div className="flex-shrink-0">
             <NavLink to="/">

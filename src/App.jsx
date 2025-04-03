@@ -1,6 +1,7 @@
 // src/App.jsx
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { ThemeProvider } from "./hooks/useTheme";
+import Chatbot from "./layout/Chatbot";
 import ProtectedRoute from "./layout/ProtectedRoute";
 import Root from "./layout/Root";
 import About from "./pages/About";
@@ -37,6 +38,14 @@ const App = () => {
           element: (
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/chatbot",
+          element: (
+            <ProtectedRoute>
+              <Chatbot />
             </ProtectedRoute>
           ),
         },
