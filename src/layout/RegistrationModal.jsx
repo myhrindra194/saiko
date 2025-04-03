@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { EyeIcon, EyeSlashIcon, XMarkIcon } from "@heroicons/react/16/solid";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
 import Loader from "../components/Loader";
 import ToastError from "../components/ToastError";
 import { createUser } from "../services/auth";
@@ -12,7 +11,6 @@ const RegistrationModal = ({ closeModal, openLoginModal }) => {
   const modalRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -32,7 +30,8 @@ const RegistrationModal = ({ closeModal, openLoginModal }) => {
     const res = await createUser(user.email, user.password, user.username);
     if (res.success) {
       console.log("user created ", user);
-      navigate("/login");
+      closeModal();
+      openLoginModal();
     } else {
       setError("Email déjà existant, réessayer");
       console.log("Error creating user");

@@ -4,23 +4,33 @@ import {
   SunIcon,
   XMarkIcon,
 } from "@heroicons/react/16/solid";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { NavLink } from "react-router";
 import saikoDark from "../assets/saiko_dark.png";
 import saikoLight from "../assets/saiko_light.png";
+import Loader from "../components/Loader";
 import UserDropdown from "../components/UserDropdown";
-import useAuth from "../hooks/useAuth";
+import { AuthContext } from "../context/AuthContext";
 import { useTheme } from "../hooks/useTheme";
-import LoginModal from "../layout/LoginModal";
-import RegistrationModal from "../layout/RegistrationModal";
+import LoginModal from "./LoginModal";
+import RegistrationModal from "./RegistrationModal";
 
 const NavBar = () => {
   const { theme, toggleTheme } = useTheme();
-  const { user, logout } = useAuth();
+  const { user, loading, logout } = useContext(AuthContext);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  const handleLogout = async () => {
+    await logout();
+    setIsMenuOpen(false);
+  };
 
   return (
     <>
@@ -48,9 +58,8 @@ const NavBar = () => {
           document.body
         )}
 
-      <nav className="w-full h-auto font-semibold animate-fade-down animate-once animate-duration-1000 animate-ease-linear animate-normal animate-fill-forwards md:px-20 px-8 py-2 dark:border-b-slate-600/40 border-b-slate-200/40 border-b sticky top-0 bg-transparent z-50 backdrop-blur-3xl">
+      <nav className="w-full h-auto font-semibold  md:px-20 px-8 py-2 dark:border-b-slate-600/40 border-b-slate-200/40 border-b sticky top-0 bg-transparent z-50 backdrop-blur-3xl">
         <div className="flex items-center relative">
-          {/* Logo à gauche */}
           <div className="flex-shrink-0">
             <NavLink to="/">
               <img
@@ -160,7 +169,7 @@ const NavBar = () => {
           <section className="hidden sm:flex items-center gap-4 text-sm font-light ml-auto">
             {user ? (
               <>
-                <UserDropdown user={user} logout={logout} />
+                <UserDropdown user={user} logout={handleLogout} />
                 <button
                   onClick={toggleTheme}
                   className="text-purple-500 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 p-1.5 rounded-full"
@@ -203,7 +212,7 @@ const NavBar = () => {
           <div className="sm:hidden flex items-center ml-auto">
             {user && (
               <div className="mr-3">
-                <UserDropdown user={user} logout={logout} mobile />
+                <UserDropdown user={user} logout={handleLogout} mobile />
               </div>
             )}
             <button
@@ -243,6 +252,7 @@ const NavBar = () => {
                           : "text-inherit"
                       }`
                     }
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     CHATBOT
                   </NavLink>
@@ -255,6 +265,7 @@ const NavBar = () => {
                           : "text-inherit"
                       }`
                     }
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     VOCAL
                   </NavLink>
@@ -267,6 +278,7 @@ const NavBar = () => {
                           : "text-inherit"
                       }`
                     }
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     BLOG
                   </NavLink>
@@ -279,6 +291,7 @@ const NavBar = () => {
                           : "text-inherit"
                       }`
                     }
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     COMMUNAUTÉ
                   </NavLink>
@@ -294,6 +307,7 @@ const NavBar = () => {
                           : "text-inherit"
                       }`
                     }
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     ABOUT US
                   </NavLink>
@@ -306,6 +320,7 @@ const NavBar = () => {
                           : "text-inherit"
                       }`
                     }
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     SERVICE
                   </NavLink>
@@ -318,18 +333,25 @@ const NavBar = () => {
                           : "text-inherit"
                       }`
                     }
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     BLOG
                   </NavLink>
                   <button
                     className="px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer"
-                    onClick={() => setShowRegisterModal(true)}
+                    onClick={() => {
+                      setShowRegisterModal(true);
+                      setIsMenuOpen(false);
+                    }}
                   >
                     SIGN UP
                   </button>
                   <button
                     className="px-3 py-1.5 rounded-xl border-purple-600 bg-purple-600 text-white cursor-pointer"
-                    onClick={() => setShowLoginModal(true)}
+                    onClick={() => {
+                      setShowLoginModal(true);
+                      setIsMenuOpen(false);
+                    }}
                   >
                     LOGIN
                   </button>

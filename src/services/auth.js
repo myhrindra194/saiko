@@ -3,6 +3,7 @@ import { account } from "../config/appwrite";
 export const createUser = async (email, password, name) => {
   try {
     const user = await account.create('unique()', email, password, name);
+    await account.createEmailPasswordSession(email, password);
     return { success: true, data: user };
   } catch (error) {
     return { success: false, error: error.message };
@@ -11,8 +12,9 @@ export const createUser = async (email, password, name) => {
 
 export const authenticateUser = async (email, password) => {
   try {
-    const session = await account.createEmailPasswordSession(email, password);
-    return { success: true, data: session };
+    await account.createEmailPasswordSession(email, password);
+    const user = await account.get();
+    return { success: true, data: user };
   } catch (error) {
     return { success: false, error: error.message };
   }

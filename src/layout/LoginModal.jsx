@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import { EyeIcon, EyeSlashIcon, XMarkIcon } from "@heroicons/react/16/solid";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import Loader from "../components/Loader";
 import ToastError from "../components/ToastError";
+import { AuthContext } from "../context/AuthContext";
 import { authenticateUser } from "../services/auth";
 
 const LoginModal = ({ closeModal, openRegisterModal }) => {
@@ -13,6 +14,7 @@ const LoginModal = ({ closeModal, openRegisterModal }) => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useContext(AuthContext);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -29,17 +31,21 @@ const LoginModal = ({ closeModal, openRegisterModal }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const res = await authenticateUser(user.email, user.password);
-
-    if (res.success) {
-      console.log("User successfuly logged in");
-      closeModal();
-      navigate("/dashboard");
-    } else {
-      console.log("Error connecting user");
-      setError("Password or email invalid");
+    try {
+      const res = await authenticateUser(user.email, user.password);
+      if (res.success) {
+        await login(res.data);
+        closeModal();
+        navigate("/dashboard");
+      } else {
+        setError("Password or email invalid");
+      }
+    } catch (error) {
+      console.log(error);
+      setError("An error occurred during login");
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   return (
@@ -61,6 +67,7 @@ const LoginModal = ({ closeModal, openRegisterModal }) => {
               type="text"
               id="email"
               className="w-full p-2 border border-gray-300 dark:border-gray-500 rounded mt-2 outline-purple-600 dark:outline-slate-200"
+              autoComplete="true"
               value={user.email}
               onChange={(e) => setUser({ ...user, email: e.target.value })}
               required
@@ -74,6 +81,7 @@ const LoginModal = ({ closeModal, openRegisterModal }) => {
               type={showPassword ? "text" : "password"}
               id="password"
               className="w-full p-2 border border-gray-300 dark:border-gray-500 rounded mt-2 outline-purple-600 dark:outline-slate-200"
+              autoComplete="true"
               value={user.password}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
               required

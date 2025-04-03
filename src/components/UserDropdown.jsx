@@ -1,23 +1,19 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
-import { logoutUser } from "../services/auth";
+import { AuthContext } from "../context/AuthContext";
 
 const UserDropdown = ({ user }) => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const { logout } = useContext(AuthContext);
 
   const handleLogout = async (e) => {
     e.preventDefault();
-    const res = await logoutUser();
-
-    if (res.success) {
-      console.log("User successfully disconnected");
-      navigate("/");
-    } else {
-      console.log("Error logging out");
-    }
+    logout();
+    setIsOpen(false);
+    navigate("/");
   };
 
   useEffect(() => {

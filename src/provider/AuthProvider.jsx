@@ -7,13 +7,28 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const login = (userData) => {
-    setUser(userData);
+  const login = async () => {
+    setLoading(true);
+    try {
+      const session = await checkSession();
+      if (session.success) {
+        setUser(session.data);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const logout = async () => {
-    await logoutUser();
-    setUser(null);
+    setLoading(true);
+    try {
+      await logoutUser();
+      setUser(null);
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
