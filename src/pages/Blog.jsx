@@ -16,25 +16,55 @@ const Blog = () => {
   const observerTarget = useRef(null);
 
   useEffect(() => {
-    let uri =
-      "https://newsapi.org/v2/everything?q=mental%20health&language=en&sortBy=publishedAt&apiKey=";
-    fetch(`${uri}${import.meta.env.VITE_NEWSAPI_API_KEY}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Network response was not ok");
-        return res.json();
-      })
-      .then((data) => {
-        if (!data.articles || !Array.isArray(data.articles)) {
-          throw new Error("Invalid data format: articles is not an array");
+    const fetchNews = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `https://newsapi.org/v2/everything?q=mental%20health&language=en&apiKey=${
+            import.meta.env.VITE_NEWSAPI_API_KEY
+          }`,
+          {
+            headers: {
+              Accept: "application/json",
+              "X-Api-Key": import.meta.env.VITE_NEWSAPI_API_KEY,
+            },
+          }
+        );
+
+        // Vérifiez d'abord le content-type
+        const contentType = response.headers.get("content-type");
+        if (!contentType?.includes("application/json")) {
+          const errorText = await response.text();
+          throw new Error(
+            `Réponse invalide: ${errorText.substring(0, 100)}...`
+          );
         }
+
+        const data = await response.json();
+
+        if (!data.articles) {
+          throw new Error("Format de données invalide");
+        }
+
         setPosts(data.articles || []);
         setVisiblePosts(data.articles.slice(0, postsPerPage));
-      })
-      .catch((error) => {
-        console.error("Fetch error:", error);
-        setPosts([]);
+      } catch (error) {
+        console.error("Erreur fetch:", error);
+        // Fallback pour le développement
+        setPosts([
+          {
+            title: "Actualités temporairement indisponibles",
+            description: error.message,
+            source: { name: "Système" },
+            publishedAt: new Date().toISOString(),
+          },
+        ]);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchNews();
   }, []);
 
   useEffect(() => {
