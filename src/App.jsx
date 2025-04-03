@@ -1,10 +1,15 @@
+// src/App.jsx
 import { createBrowserRouter, RouterProvider } from "react-router";
-import { ThemeProvider } from "./hooks/useTheme.jsx";
-import Root from "./layout/Root.jsx";
-import About from "./pages/About.jsx";
-import Blog from "./pages/Blog.jsx";
-import Home from "./pages/Home.jsx";
-import Service from "./pages/Service.jsx";
+import { ThemeProvider } from "./hooks/useTheme";
+import Chatbot from "./layout/Chatbot";
+import ProtectedRoute from "./layout/ProtectedRoute";
+import Root from "./layout/Root";
+import About from "./pages/About";
+import Blog from "./pages/Blog";
+import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
+import Service from "./pages/Service";
+import { AuthProvider } from "./provider/AuthProvider";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -28,14 +33,32 @@ const App = () => {
           path: "/blog",
           element: <Blog />,
         },
+        {
+          path: "/dashboard",
+          element: (
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/chatbot",
+          element: (
+            <ProtectedRoute>
+              <Chatbot />
+            </ProtectedRoute>
+          ),
+        },
       ],
     },
   ]);
 
   return (
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </AuthProvider>
   );
 };
 

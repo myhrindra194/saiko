@@ -33,7 +33,7 @@ const PostCard = ({ post }) => {
             </button>
           </div>
           <div
-            className="text-sm text-gray-700 dark:text-gray-300 mt-2"
+            className="text-sm text-gray-700 dark:text-gray-300 mt-2 "
             dangerouslySetInnerHTML={{ __html: cleanedContent }}
           />
           <div className="mt-2">
