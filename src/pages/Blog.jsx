@@ -102,7 +102,7 @@ const Blog = () => {
     setVisiblePosts(filteredPosts.slice(0, page * postsPerPage));
   }, [filter, selectedSource, posts, page]);
 
-  const sources = [...new Set(posts.map((post) => post.source.name))];
+  const sources = [...new Set(posts?.map((post) => post.source.name))];
 
   return (
     <div className="md:px-20 px-8 relative py-4 md:pt-5 mt-20">
