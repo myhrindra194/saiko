@@ -19,14 +19,20 @@ const Blog = () => {
     let uri =
       "https://newsapi.org/v2/everything?q=mental%20health&language=en&sortBy=publishedAt&apiKey=";
     fetch(`${uri}${import.meta.env.VITE_NEWSAPI_API_KEY}`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
       .then((data) => {
-        setPosts(data.articles);
+        if (!data.articles || !Array.isArray(data.articles)) {
+          throw new Error("Invalid data format: articles is not an array");
+        }
+        setPosts(data.articles || []);
         setVisiblePosts(data.articles.slice(0, postsPerPage));
-        setLoading(false);
       })
       .catch((error) => {
-        console.error(error);
+        console.error("Fetch error:", error);
+        setPosts([]);
         setLoading(false);
       });
   }, []);
@@ -85,7 +91,7 @@ const Blog = () => {
   };
 
   useEffect(() => {
-    let filteredPosts = [...posts];
+    let filteredPosts = [...(posts || [])];
 
     if (filter === "recent") {
       filteredPosts = sortPostsByDate(filteredPosts, "recent");
@@ -95,15 +101,16 @@ const Blog = () => {
 
     if (selectedSource !== "all") {
       filteredPosts = filteredPosts.filter(
-        (post) => post.source.name === selectedSource
+        (post) => post?.source?.name === selectedSource
       );
     }
 
     setVisiblePosts(filteredPosts.slice(0, page * postsPerPage));
   }, [filter, selectedSource, posts, page]);
 
-  const sources = [...new Set(posts?.map((post) => post.source?.name))];
-
+  const sources = Array.isArray(posts)
+    ? [...new Set(posts.map((post) => post?.source?.name).filter(Boolean))]
+    : [];
   return (
     <div className="md:px-20 px-8 relative py-4 md:pt-5 mt-20">
       <div className="flex flex-wrap gap-4 my-5">
