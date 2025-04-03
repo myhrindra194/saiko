@@ -102,7 +102,7 @@ const Blog = () => {
     setVisiblePosts(filteredPosts.slice(0, page * postsPerPage));
   }, [filter, selectedSource, posts, page]);
 
-  const sources = [...new Set(posts?.map((post) => post.source.name))];
+  const sources = [...new Set(posts?.map((post) => post.source?.name))];
 
   return (
     <div className="md:px-20 px-8 relative py-4 md:pt-5 mt-20">
@@ -122,7 +122,7 @@ const Blog = () => {
           className="p-2.5 rounded-lg bg-white/70 dark:bg-slate-700/50 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-white focus:ring-purple-500 focus:border-purple-500"
         >
           <option value="all">All ressources</option>
-          {sources.map((source) => (
+          {sources?.map((source) => (
             <option key={source} value={source}>
               {source}
             </option>
@@ -131,7 +131,7 @@ const Blog = () => {
       </div>
 
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
-        {visiblePosts.map((post, index) => (
+        {visiblePosts?.map((post, index) => (
           <div key={index} className="break-inside-avoid mb-6">
             <PostCard post={post} />
           </div>
