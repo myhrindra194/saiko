@@ -6,7 +6,7 @@ import ProtectedRoute from "./layout/ProtectedRoute";
 import Root from "./layout/Root";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
-import Dashboard from "./pages/Dashboard";
+import Community from "./pages/Community";
 import Home from "./pages/Home";
 import Service from "./pages/Service";
 import { AuthProvider } from "./provider/AuthProvider";
@@ -34,10 +34,10 @@ const App = () => {
           element: <Blog />,
         },
         {
-          path: "/dashboard",
+          path: "/community",
           element: (
             <ProtectedRoute>
-              <Dashboard />
+              <Community />
             </ProtectedRoute>
           ),
         },

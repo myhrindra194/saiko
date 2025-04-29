@@ -75,7 +75,7 @@ const NavBar = () => {
               {user ? (
                 <>
                   <NavLink
-                    to="/"
+                    to="/community"
                     className={({ isActive }) =>
                       `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
                         isActive
@@ -272,7 +272,7 @@ const NavBar = () => {
                     BLOG
                   </NavLink>
                   <NavLink
-                    to="/"
+                    to="/community"
                     className={({ isActive }) =>
                       `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer ${
                         isActive
@@ -282,7 +282,7 @@ const NavBar = () => {
                     }
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    COMMUNAUTÉ
+                    COMMUNITY
                   </NavLink>
                 </>
               ) : (

@@ -36,7 +36,7 @@ const LoginModal = ({ closeModal, openRegisterModal }) => {
       if (res.success) {
         login(res.data);
         closeModal();
-        navigate("/dashboard");
+        navigate("/community");
       } else {
         setError("Password or email invalid");
       }
