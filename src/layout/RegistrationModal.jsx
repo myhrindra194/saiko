@@ -33,7 +33,7 @@ const RegistrationModal = ({ closeModal, openLoginModal }) => {
       closeModal();
       openLoginModal();
     } else {
-      setError("Email déjà existant, réessayer");
+      setError("Email already taken, retry");
       console.log("Error creating user");
     }
     setIsLoading(false);
@@ -58,6 +58,7 @@ const RegistrationModal = ({ closeModal, openLoginModal }) => {
               type="email"
               id="email"
               className="w-full p-2 border border-gray-300 dark:border-gray-500 rounded mt-2 outline-purple-600 dark:outline-slate-200"
+              autoComplete="true"
               value={user.email}
               onChange={(e) => setUser({ ...user, email: e.target.value })}
               required
@@ -71,6 +72,7 @@ const RegistrationModal = ({ closeModal, openLoginModal }) => {
               type="text"
               id="username"
               className="w-full p-2 border border-gray-300 dark:border-gray-500 rounded mt-2 outline-purple-600 dark:outline-slate-200"
+              autoComplete="true"
               value={user.username}
               onChange={(e) => setUser({ ...user, username: e.target.value })}
               required
@@ -84,6 +86,7 @@ const RegistrationModal = ({ closeModal, openLoginModal }) => {
               type={showPassword ? "text" : "password"}
               id="password"
               className="w-full p-2 border border-gray-300 dark:border-gray-500 rounded mt-2 outline-purple-600 dark:outline-slate-200"
+              autoComplete="false"
               value={user.password}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
               required

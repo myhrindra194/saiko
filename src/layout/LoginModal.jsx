@@ -34,7 +34,7 @@ const LoginModal = ({ closeModal, openRegisterModal }) => {
     try {
       const res = await authenticateUser(user.email, user.password);
       if (res.success) {
-        await login(res.data);
+        login(res.data);
         closeModal();
         navigate("/dashboard");
       } else {

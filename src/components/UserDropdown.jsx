@@ -36,7 +36,7 @@ const UserDropdown = ({ user }) => {
         type="button"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {user?.name.charAt(0)}
+        {user?.name.charAt(0).toUpperCase()}
       </button>
 
       <div
@@ -66,14 +66,6 @@ const UserDropdown = ({ user }) => {
               className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               Settings
-            </a>
-          </li>
-          <li>
-            <a
-              href="#"
-              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-            >
-              Earnings
             </a>
           </li>
         </ul>

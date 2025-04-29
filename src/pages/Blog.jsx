@@ -1,7 +1,7 @@
 import { ArrowUpIcon } from "@heroicons/react/24/solid";
 import { useEffect, useRef, useState } from "react";
-import Loader from "../components/Loader";
 import PostCard from "../components/PostCard";
+import PostCardSkeleton from "../components/PostCardSkeleton";
 import { sortPostsByDate } from "../utils/function";
 
 const Blog = () => {
@@ -9,6 +9,7 @@ const Blog = () => {
   const [visiblePosts, setVisiblePosts] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [showScrollButton, setShowScrollButton] = useState(false);
   const [filter, setFilter] = useState("recent");
   const [selectedSource, setSelectedSource] = useState("all");
@@ -29,11 +30,12 @@ const Blog = () => {
         }
         setPosts(data.articles || []);
         setVisiblePosts(data.articles.slice(0, postsPerPage));
+        setInitialLoading(false);
       })
       .catch((error) => {
         console.error("Fetch error:", error);
         setPosts([]);
-        setLoading(false);
+        setInitialLoading(false);
       });
   }, []);
 
@@ -111,6 +113,10 @@ const Blog = () => {
   const sources = Array.isArray(posts)
     ? [...new Set(posts.map((post) => post?.source?.name).filter(Boolean))]
     : [];
+
+  // Generate skeleton array for initial loading
+  const skeletonArray = Array.from({ length: 6 }, (_, i) => i);
+
   return (
     <div className="md:px-20 px-8 relative py-4 md:pt-5 mt-20">
       <div className="flex flex-wrap gap-4 my-5">
@@ -138,18 +144,28 @@ const Blog = () => {
       </div>
 
       <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
-        {visiblePosts?.map((post, index) => (
-          <div key={index} className="break-inside-avoid mb-6">
-            <PostCard post={post} />
-          </div>
-        ))}
+        {initialLoading
+          ? skeletonArray.map((_, index) => (
+              <div key={index} className="break-inside-avoid mb-6">
+                <PostCardSkeleton />
+              </div>
+            ))
+          : visiblePosts?.map((post, index) => (
+              <div key={index} className="break-inside-avoid mb-6">
+                <PostCard post={post} />
+              </div>
+            ))}
       </div>
 
       <div ref={observerTarget} className="h-10"></div>
 
-      {loading && (
-        <div className="flex justify-center mt-6">
-          <Loader />
+      {loading && !initialLoading && (
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+          {Array.from({ length: postsPerPage }, (_, i) => (
+            <div key={`loading-${i}`} className="break-inside-avoid mb-6">
+              <PostCardSkeleton />
+            </div>
+          ))}
         </div>
       )}
 

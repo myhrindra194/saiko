@@ -28,7 +28,7 @@ const NavBar = () => {
   }
 
   const handleLogout = async () => {
-    await logout();
+    logout();
     setIsMenuOpen(false);
   };
 
@@ -75,6 +75,18 @@ const NavBar = () => {
               {user ? (
                 <>
                   <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
+                        isActive
+                          ? "text-purple-600 font-medium"
+                          : "text-inherit"
+                      }`
+                    }
+                  >
+                    COMMUNITY
+                  </NavLink>
+                  <NavLink
                     to="/chatbot"
                     className={({ isActive }) =>
                       `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
@@ -86,18 +98,7 @@ const NavBar = () => {
                   >
                     CHATBOT
                   </NavLink>
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
-                        isActive
-                          ? "text-purple-600 font-medium"
-                          : "text-inherit"
-                      }`
-                    }
-                  >
-                    VOCAL
-                  </NavLink>
+
                   <NavLink
                     to="/blog"
                     className={({ isActive }) =>
@@ -109,18 +110,6 @@ const NavBar = () => {
                     }
                   >
                     BLOG
-                  </NavLink>
-                  <NavLink
-                    to="/"
-                    className={({ isActive }) =>
-                      `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
-                        isActive
-                          ? "text-purple-600 font-medium"
-                          : "text-inherit"
-                      }`
-                    }
-                  >
-                    COMMUNAUTÉ
                   </NavLink>
                 </>
               ) : (
