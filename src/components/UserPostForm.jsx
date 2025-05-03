@@ -31,6 +31,7 @@ const UserPostForm = ({ onSubmitPost }) => {
         <div className="mb-2">
           <textarea
             value={content}
+            id="post"
             onChange={(e) => setContent(e.target.value)}
             placeholder="Share your feelings..."
             className="w-full px-4 py-3 rounded-lg dark:border-slate-600 bg-white/50 dark:bg-slate-700/30 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 focus-within:outline-none"
@@ -46,9 +47,13 @@ const UserPostForm = ({ onSubmitPost }) => {
         )}
 
         <div className="flex items-center justify-between">
-          <label className="inline-flex items-center cursor-pointer">
+          <label
+            className="inline-flex items-center cursor-pointer"
+            htmlFor="anonyme"
+          >
             <input
               type="checkbox"
+              id="anonyme"
               checked={isAnonymous}
               onChange={() => setIsAnonymous(!isAnonymous)}
               className="sr-only peer"

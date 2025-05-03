@@ -26,9 +26,7 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
 
   useEffect(() => {
     if (post) {
-      const userLikeStatus = post.likes?.some(
-        (like) => like.userId === user?.$id
-      );
+      const userLikeStatus = post.likes?.includes(user?.$id);
       setIsLiked(userLikeStatus);
       setLikeCount(post.likes?.length || 0);
     }

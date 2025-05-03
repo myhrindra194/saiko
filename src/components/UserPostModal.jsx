@@ -6,6 +6,7 @@ import { addComment, fetchComments } from "../services/postService";
 import { formatDate } from "../utils/function";
 import Avatar from "./Avatar";
 import CommentCard from "./CommentCard";
+import CommentForm from "./CommentForm";
 import ConfirmationModal from "./ConfirmationModal";
 import LikeButton from "./LikeButton";
 import Loader from "./Loader";
@@ -22,9 +23,6 @@ const UserPostModal = ({
 }) => {
   const { token, user } = useAuth();
   const [comments, setComments] = useState([]);
-  const [commentContent, setCommentContent] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState(null);
   const [isLoadingComments, setIsLoadingComments] = useState(true);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -40,7 +38,7 @@ const UserPostModal = ({
         const commentsData = await fetchComments(post.idPost, token);
         setComments(commentsData);
       } catch (err) {
-        setError(err.message);
+        console.error("Failed to load comments:", err);
       } finally {
         setIsLoadingComments(false);
       }
@@ -49,24 +47,21 @@ const UserPostModal = ({
     loadComments();
   }, [post.idPost, token]);
 
-  const handleAddComment = async (e) => {
-    e.preventDefault();
-    if (!commentContent.trim() || !token) return;
-
-    setIsSubmitting(true);
-    setError(null);
+  const handleAddComment = async (content, isAnonymous) => {
+    if (!content.trim() || !token) return;
 
     try {
-      const newComment = await addComment(post.idPost, commentContent, token);
+      const newComment = await addComment(
+        post.idPost,
+        content,
+        isAnonymous,
+        token
+      );
       setComments((prev) => [newComment, ...prev]);
-      setCommentContent("");
       if (onUpdate) onUpdate();
     } catch (err) {
-      console.log(err);
-
-      setError(err.message);
-    } finally {
-      setIsSubmitting(false);
+      console.error("Failed to add comment:", err);
+      throw err;
     }
   };
 
@@ -144,7 +139,7 @@ const UserPostModal = ({
               </div>
             </section>
 
-            <section className="mb-6 ">
+            <section className="mb-6">
               <h3 className="font-medium text-lg mb-3 dark:text-white">
                 Comments ({comments.length})
               </h3>
@@ -165,28 +160,7 @@ const UserPostModal = ({
           </div>
 
           <footer className="p-4 border-t border-gray-200 dark:border-slate-700">
-            <form onSubmit={handleAddComment}>
-              <div className="mb-2">
-                <textarea
-                  value={commentContent}
-                  onChange={(e) => setCommentContent(e.target.value)}
-                  placeholder="Add a comment..."
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent focus-within:outline-0"
-                  rows={2}
-                  disabled={isSubmitting}
-                />
-              </div>
-              {error && (
-                <div className="mb-2 text-sm text-red-500">{error}</div>
-              )}
-              <button
-                type="submit"
-                disabled={!commentContent.trim() || isSubmitting}
-                className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg disabled:opacity-50"
-              >
-                {isSubmitting ? "Posting..." : "Post Comment"}
-              </button>
-            </form>
+            <CommentForm onSubmit={handleAddComment} isLoading={false} />
           </footer>
         </div>
       </div>

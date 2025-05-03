@@ -100,7 +100,8 @@ const LoginModal = ({ closeModal, openRegisterModal }) => {
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center items-center bg-purple-700 text-white p-2 rounded-lg hover:bg-purple-600 hover:ring-1 hover:ring-purple-500"
+            className="w-full flex justify-center items-center bg-purple-700 text-white p-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={!user.email.trim() || !user.password.trim() || isLoading}
           >
             {isLoading ? <Loader /> : "Login"}
           </button>

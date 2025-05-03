@@ -39,14 +39,14 @@ export const likePost = async (postId, token) => {
   return await response.json();
 };
 
-export const addComment = async (postId, content, token) => {
+export const addComment = async (postId, content, isAnonymous, token) => {
   const response = await fetch(`${BASE_API_URI}/posts/${postId}/comments`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ content }),
+    body: JSON.stringify({ content, isAnonymous }),
   });
   
   if (!response.ok) throw new Error("Failed to add comment");
