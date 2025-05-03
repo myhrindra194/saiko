@@ -3,7 +3,7 @@ import { EyeIcon, EyeSlashIcon, XMarkIcon } from "@heroicons/react/16/solid";
 import { useEffect, useRef, useState } from "react";
 import Loader from "../components/Loader";
 import ToastError from "../components/ToastError";
-import { createUser } from "../services/auth";
+import { createUser } from "../services/authService";
 
 const RegistrationModal = ({ closeModal, openLoginModal }) => {
   const [user, setUser] = useState({ email: "", username: "", password: "" });

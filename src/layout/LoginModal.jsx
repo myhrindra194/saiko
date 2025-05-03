@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import Loader from "../components/Loader";
 import ToastError from "../components/ToastError";
 import { AuthContext } from "../context/AuthContext";
-import { authenticateUser } from "../services/auth";
+import { authenticateUser } from "../services/authService";
 
 const LoginModal = ({ closeModal, openRegisterModal }) => {
   const [user, setUser] = useState({ email: "", password: "" });

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { checkSession, logoutUser } from "../services/auth";
+import { checkSession, logoutUser } from "../services/authService";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

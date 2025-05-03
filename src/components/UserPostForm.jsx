@@ -26,28 +26,25 @@ const UserPostForm = ({ onSubmitPost }) => {
   };
 
   return (
-    <div className="p-4 rounded-lg shadow bg-white/50 hover:bg-white/70 dark:bg-slate-800/50 dark:hover:bg-slate-700/50 border border-gray-200 dark:border-slate-700 transition-colors duration-300 mb-6">
+    <div className="p-4 rounded-lg shadow bg-white/50  dark:bg-slate-800/50  border border-gray-200 dark:border-slate-700 transition-colors duration-300 mb-6">
       <form onSubmit={handleSubmit}>
-        {/* Champ de texte */}
         <div className="mb-2">
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="Share your feelings..."
-            className="w-full px-4 py-3 rounded-lg dark:border-slate-600 bg-white/50 dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 focus-within:outline-none"
+            className="w-full px-4 py-3 rounded-lg dark:border-slate-600 bg-white/50 dark:bg-slate-700/30 text-gray-900 dark:text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 focus-within:outline-none"
             rows={3}
             disabled={isSubmitting}
           />
         </div>
 
-        {/* Affichage des erreurs */}
         {error && (
           <div className="mb-2 text-sm text-red-500 dark:text-red-400">
             {error}
           </div>
         )}
 
-        {/* Options et bouton */}
         <div className="flex items-center justify-between">
           <label className="inline-flex items-center cursor-pointer">
             <input
