@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import UserPostForm from "../components/UserPostForm";
 import UserPostList from "../components/UserPostList";
 import useAuth from "../hooks/useAuth";
+import { addPost, deletePost, fetchPosts } from "../services/postService";
 
 const Community = () => {
   const { token } = useAuth();
@@ -9,53 +10,59 @@ const Community = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchPosts = async () => {
-    if (!token) return;
-
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BASE_API_URI}/posts`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-
-      if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
-
-      const data = await response.json();
-      setPosts(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
-    fetchPosts();
+    const loadPosts = async () => {
+      try {
+        setLoading(true);
+        const postsData = await fetchPosts(token);
+        setPosts(postsData);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPosts();
   }, [token]);
 
   const handleSubmitPost = async (content, isAnonymous) => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BASE_API_URI}/posts`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({ content, isAnonymous }),
-        }
-      );
-
-      if (!response.ok) throw new Error(`Erreur HTTP: ${response.status}`);
-
-      await fetchPosts();
+      await addPost(content, isAnonymous, token);
+      const updatedPosts = await fetchPosts(token);
+      setPosts(updatedPosts);
       return true;
     } catch (err) {
       setError(err.message);
       return false;
+    }
+  };
+  const handleDeletePost = async (postId) => {
+    setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
+
+    try {
+      const result = await deletePost(postId, token);
+
+      if (result.alreadyDeleted) {
+        console.log(
+          "Post was already deleted on server - UI remains consistent"
+        );
+        return;
+      }
+
+      const freshPosts = await fetchPosts(token);
+      setPosts(freshPosts);
+    } catch (error) {
+      console.error("Delete error:", error);
+
+      try {
+        const freshPosts = await fetchPosts(token);
+        setPosts(freshPosts);
+      } catch (fetchError) {
+        console.error("Failed to refresh posts:", fetchError);
+      }
+
+      setError(error.message);
     }
   };
 
@@ -68,7 +75,7 @@ const Community = () => {
         ) : error ? (
           <div className="text-red-500">Erreur: {error}</div>
         ) : (
-          <UserPostList posts={posts} />
+          <UserPostList posts={posts} onDeletePost={handleDeletePost} />
         )}
       </div>
     </div>
