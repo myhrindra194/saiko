@@ -1,7 +1,8 @@
-import { ArrowUpIcon } from "@heroicons/react/24/solid";
+// pages/Blog.jsx
 import { useEffect, useRef, useState } from "react";
 import PostCard from "../components/PostCard";
 import PostCardSkeleton from "../components/PostCardSkeleton";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 import { sortPostsByDate } from "../utils/function";
 
 const Blog = () => {
@@ -10,16 +11,14 @@ const Blog = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [initialLoading, setInitialLoading] = useState(true);
-  const [showScrollButton, setShowScrollButton] = useState(false);
   const [filter, setFilter] = useState("recent");
   const [selectedSource, setSelectedSource] = useState("all");
   const postsPerPage = 5;
   const observerTarget = useRef(null);
 
   useEffect(() => {
-    let uri =
-      "https://newsapi.org/v2/everything?q=mental%20health&language=en&sortBy=publishedAt&apiKey=";
-    fetch(`${uri}${import.meta.env.VITE_NEWSAPI_API_KEY}`)
+    let uri = import.meta.env.VITE_NEWSAPI;
+    fetch(uri)
       .then((res) => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
@@ -76,23 +75,6 @@ const Blog = () => {
   }, [page, posts]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      window.scrollY > 200
-        ? setShowScrollButton(true)
-        : setShowScrollButton(false);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  useEffect(() => {
     let filteredPosts = [...(posts || [])];
 
     if (filter === "recent") {
@@ -114,7 +96,6 @@ const Blog = () => {
     ? [...new Set(posts.map((post) => post?.source?.name).filter(Boolean))]
     : [];
 
-  // Generate skeleton array for initial loading
   const skeletonArray = Array.from({ length: 6 }, (_, i) => i);
 
   return (
@@ -169,14 +150,7 @@ const Blog = () => {
         </div>
       )}
 
-      {showScrollButton && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 bg-purple-500 hover:bg-purple-600 text-white"
-        >
-          <ArrowUpIcon className="w-6 h-6" />
-        </button>
-      )}
+      <ScrollToTopButton />
     </div>
   );
 };

@@ -1,14 +1,11 @@
 /* eslint-disable react/prop-types */
-import {
-  ChatBubbleBottomCenterIcon,
-  ClockIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
+import { ClockIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { likePost } from "../services/postService";
 import { formatDate } from "../utils/function";
 import Avatar from "./Avatar";
+import CommentButton from "./CommentButton";
 import ConfirmationModal from "./ConfirmationModal";
 import LikeButton from "./LikeButton";
 import UserPostModal from "./UserPostModal";
@@ -96,7 +93,7 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
             <Avatar isAnonymous={post?.isAnonymous} name={post?.author.name} />
             <div>
               <p className="text-sm font-medium text-gray-900 dark:text-white">
-                {post?.isAnonymous ? "Anonymous" : post?.author.name}
+                {post?.isAnonymous ? "Anonyme" : post?.author.name}
               </p>
               <p className="text-xs text-gray-500 flex items-center dark:text-white">
                 <ClockIcon className="w-3 h-3 mr-1" />
@@ -106,7 +103,7 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
           </div>
         </header>
 
-        <p className="mb-4 whitespace-pre-line text-gray-900 dark:text-gray-300 text-sm">
+        <p className="mb-4 whitespace-pre-line text-gray-900 dark:text-gray-300 ">
           {post?.content}
         </p>
 
@@ -148,17 +145,5 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
     </>
   );
 };
-
-const CommentButton = ({ count, onClick }) => (
-  <button
-    className="flex items-center text-gray-500 hover:text-purple-500 transition-colors"
-    onClick={onClick}
-  >
-    <ChatBubbleBottomCenterIcon className="w-5 h-5 mr-1" />
-    <span className="text-sm">
-      {count} Comment{count > 1 ? "s" : ""}
-    </span>
-  </button>
-);
 
 export default UserPostCard;

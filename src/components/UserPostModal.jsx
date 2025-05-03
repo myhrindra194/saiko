@@ -118,7 +118,7 @@ const UserPostModal = ({
                 />
                 <div>
                   <p className="text-sm font-medium text-gray-900 dark:text-white">
-                    {post?.isAnonymous ? "Anonymous" : post?.author.name}
+                    {post?.isAnonymous ? "Anonyme" : post?.author.name}
                   </p>
                   <p className="text-xs text-gray-500 flex items-center dark:text-gray-300">
                     <ClockIcon className="w-3 h-3 mr-1" />
@@ -141,7 +141,7 @@ const UserPostModal = ({
 
             <section className="mb-6">
               <h3 className="font-medium text-lg mb-3 dark:text-white">
-                Comments ({comments.length})
+                Commentaires ({comments.length})
               </h3>
               {isLoadingComments ? (
                 <Loader />
@@ -153,7 +153,7 @@ const UserPostModal = ({
                 </div>
               ) : (
                 <p className="text-gray-500 dark:text-gray-400">
-                  No comments yet
+                  Aucun commentaire
                 </p>
               )}
             </section>
@@ -171,7 +171,6 @@ const UserPostModal = ({
         onConfirm={handleDelete}
         title="Delete Post"
         message="Are you sure you want to delete this post? This action cannot be undone."
-        confirmText={isDeleting ? "Deleting..." : "Delete"}
         isProcessing={isDeleting}
       />
     </>

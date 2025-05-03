@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import Loader from "./Loader";
 
 const ConfirmationModal = ({
   isOpen,
@@ -9,8 +8,6 @@ const ConfirmationModal = ({
   onConfirm,
   title,
   message,
-  confirmText = "Confirm",
-  cancelText = "Cancel",
   isProcessing = false,
 }) => {
   if (!isOpen) return null;
@@ -38,7 +35,7 @@ const ConfirmationModal = ({
             disabled={isProcessing}
             className="px-4 py-2 border border-gray-300 dark:border-slate-600 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50"
           >
-            {cancelText}
+            Cancel
           </button>
           <button
             type="button"
@@ -46,14 +43,7 @@ const ConfirmationModal = ({
             disabled={isProcessing}
             className="px-4 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50"
           >
-            {isProcessing ? (
-              <span className="flex items-center">
-                <Loader />
-                {confirmText}
-              </span>
-            ) : (
-              confirmText
-            )}
+            {isProcessing ? "Loading..." : "Confirm"}
           </button>
         </div>
       </div>
