@@ -84,3 +84,21 @@ export const deletePost = async (postId, token) => {
 
   return await response.json();
 };
+
+export const updatePost = async (postId, content, isAnonymous, token) => {
+  const response = await fetch(`${BASE_API_URI}/posts/${postId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ content, isAnonymous }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || `HTTP Error: ${response.status}`);
+  }
+
+  return await response.json();
+};

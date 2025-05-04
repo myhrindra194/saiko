@@ -1,43 +1,14 @@
 /* eslint-disable react/prop-types */
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { validatePostWithGemini } from "../services/geminiService";
 
 const UserPostForm = ({ onSubmitPost }) => {
   const [content, setContent] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
-
-  const validatePost = async (text) => {
-    try {
-      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-pro-latest",
-        apiVersion: "v1",
-      });
-
-      const prompt = `Ce post est-il approprié pour une communauté bienveillante ? Réponds uniquement par "true" ou "false".
-      
-      Critères de rejet:
-      - Langage offensant ou insultes
-      - Conseils dangereux ou illégaux
-      - Harcèlement ou discrimination
-      - Contenu explicite ou NSFW
-      
-      Post: "${text}"`;
-
-      const result = await model.generateContent(prompt);
-      const response = result.response;
-      const textResponse = response.text().trim().toLowerCase();
-
-      return textResponse === "true";
-    } catch (error) {
-      console.error("Erreur avec l'API Gemini:", error);
-      return false;
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,7 +17,7 @@ const UserPostForm = ({ onSubmitPost }) => {
     setIsSubmitting(true);
     setError(null);
 
-    const isValid = await validatePost(content);
+    const isValid = await validatePostWithGemini(content);
 
     if (!isValid) {
       toast.error(

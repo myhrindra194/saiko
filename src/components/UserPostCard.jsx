@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { ClockIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { ClockIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { likePost } from "../services/postService";
@@ -8,11 +8,13 @@ import Avatar from "./Avatar";
 import CommentButton from "./CommentButton";
 import ConfirmationModal from "./ConfirmationModal";
 import LikeButton from "./LikeButton";
+import UpdatePostModal from "./UpdatePostModal";
 import UserPostModal from "./UserPostModal";
 
 const UserPostCard = ({ post, onUpdate, onDelete }) => {
   const { token, user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [isLikeLoading, setIsLikeLoading] = useState(false);
@@ -69,6 +71,11 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
     setIsModalOpen(true);
   };
 
+  const openUpdateModal = (e) => {
+    e?.stopPropagation();
+    setIsUpdateModalOpen(true);
+  };
+
   return (
     <>
       <article
@@ -76,16 +83,25 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
         onClick={openModal}
       >
         {isAuthor && (
-          <button
-            className="absolute top-2 right-2 p-1 text-gray-400 hover:text-red-500 transition-colors"
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowDeleteConfirm(true);
-            }}
-            aria-label="Delete post"
-          >
-            <TrashIcon className="w-5 h-5" />
-          </button>
+          <div className="absolute top-2 right-2 flex space-x-2">
+            <button
+              className="p-1 text-gray-400 hover:text-blue-500 transition-colors"
+              onClick={openUpdateModal}
+              aria-label="Edit post"
+            >
+              <PencilIcon className="w-5 h-5" />
+            </button>
+            <button
+              className="p-1 text-gray-400 hover:text-red-500 transition-colors"
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowDeleteConfirm(true);
+              }}
+              aria-label="Delete post"
+            >
+              <TrashIcon className="w-5 h-5" />
+            </button>
+          </div>
         )}
 
         <header className="flex items-center justify-between mb-3">
@@ -103,7 +119,7 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
           </div>
         </header>
 
-        <p className="mb-4 whitespace-pre-line text-gray-900 dark:text-gray-300 ">
+        <p className="mb-4 whitespace-pre-line text-gray-900 dark:text-gray-300">
           {post?.content}
         </p>
 
@@ -130,6 +146,17 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
           onClose={() => setIsModalOpen(false)}
           onUpdate={onUpdate}
           onDelete={onDelete}
+        />
+      )}
+
+      {isUpdateModalOpen && (
+        <UpdatePostModal
+          post={post}
+          onClose={() => setIsUpdateModalOpen(false)}
+          onUpdate={(updatedPost) => {
+            if (onUpdate) onUpdate(updatedPost);
+            setIsUpdateModalOpen(false);
+          }}
         />
       )}
 

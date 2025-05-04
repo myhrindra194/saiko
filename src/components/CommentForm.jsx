@@ -1,41 +1,13 @@
 /* eslint-disable react/prop-types */
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { PaperAirplaneIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { validatePostWithGemini } from "../services/geminiService";
 
 const CommentForm = ({ onSubmit, isLoading }) => {
   const [commentContent, setCommentContent] = useState("");
   const [isAnonymous, setIsAnonymous] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const validateComment = async (text) => {
-    try {
-      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-pro-latest",
-        apiVersion: "v1",
-      });
-
-      const prompt = `Ce commentaire est-il approprié pour une communauté bienveillante ? Réponds uniquement par "true" ou "false".
-      
-      Critères de rejet:
-      - Langage offensant ou insultes
-      - Conseils dangereux ou illégaux
-      - Harcèlement ou discrimination
-      - Contenu explicite ou NSFW
-      
-      Commentaire: "${text}"`;
-
-      const result = await model.generateContent(prompt);
-      const response = result.response;
-      return response.text().trim().toLowerCase() === "true";
-    } catch (error) {
-      console.error("Erreur avec l'API Gemini:", error);
-      toast.error("Service de validation temporairement indisponible");
-      return false;
-    }
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,15 +17,10 @@ const CommentForm = ({ onSubmit, isLoading }) => {
       return;
     }
 
-    if (commentContent.length < 5) {
-      toast.error("Le commentaire doit contenir au moins 5 caractères");
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
-      const isValid = await validateComment(commentContent);
+      const isValid = await validatePostWithGemini(commentContent);
 
       if (!isValid) {
         toast.error(

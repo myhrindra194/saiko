@@ -28,8 +28,12 @@ const Community = () => {
       try {
         setLoading(true);
         const postsData = await fetchPosts(token);
-        setPosts(postsData);
-        setFilteredPosts(postsData);
+        // Ajout d'une validation des données
+        const validatedPosts = Array.isArray(postsData)
+          ? postsData.filter((post) => post?.idPost)
+          : [];
+        setPosts(validatedPosts);
+        setFilteredPosts(validatedPosts);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -45,20 +49,27 @@ const Community = () => {
   }, [posts, searchTerm, filters]);
 
   const applyFilters = () => {
-    let result = [...posts];
+    // Ajout d'une vérification de sécurité
+    if (!Array.isArray(posts)) {
+      setFilteredPosts([]);
+      return;
+    }
+
+    let result = [...posts].filter((post) => post); // Filtre les posts undefined
 
     // Filtre par recherche
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
       result = result.filter(
         (post) =>
-          post.content.toLowerCase().includes(term) ||
-          (post.author?.name && post.author.name.toLowerCase().includes(term))
+          post?.content?.toLowerCase().includes(term) ||
+          (post?.author?.name && post.author.name.toLowerCase().includes(term))
       );
     }
 
     // Filtres de visibilité
     result = result.filter((post) => {
+      if (!post?.author) return false;
       if (post.isAnonymous && !filters.showAnonymous) return false;
       if (user?.$id === post.author?.id && !filters.showUserPosts) return false;
       if (user?.$id !== post.author?.id && !filters.showOthersPosts)
@@ -69,9 +80,9 @@ const Community = () => {
     // Tri
     result.sort((a, b) => {
       if (filters.sortBy === "newest") {
-        return new Date(b.createdAt) - new Date(a.createdAt);
+        return new Date(b?.createdAt) - new Date(a?.createdAt);
       } else {
-        return new Date(a.createdAt) - new Date(b.createdAt);
+        return new Date(a?.createdAt) - new Date(b?.createdAt);
       }
     });
 
@@ -82,7 +93,10 @@ const Community = () => {
     try {
       await addPost(content, isAnonymous, token);
       const updatedPosts = await fetchPosts(token);
-      setPosts(updatedPosts);
+      const validatedPosts = Array.isArray(updatedPosts)
+        ? updatedPosts.filter((post) => post?.idPost)
+        : [];
+      setPosts(validatedPosts);
       return true;
     } catch (err) {
       setError(err.message);
@@ -91,26 +105,47 @@ const Community = () => {
   };
 
   const handleDeletePost = async (postId) => {
-    // Optimistic UI update
-    setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
+    // Optimistic UI update avec vérification
+    setPosts((prevPosts) =>
+      Array.isArray(prevPosts)
+        ? prevPosts.filter((post) => post?._id !== postId)
+        : []
+    );
 
     try {
       await deletePost(postId, token);
       const freshPosts = await fetchPosts(token);
-      setPosts(freshPosts);
+      const validatedPosts = Array.isArray(freshPosts)
+        ? freshPosts.filter((post) => post?.idPost)
+        : [];
+      setPosts(validatedPosts);
     } catch (error) {
       console.error("Delete error:", error);
       setError(error.message);
       // Revert if error
       const freshPosts = await fetchPosts(token);
-      setPosts(freshPosts);
+      const validatedPosts = Array.isArray(freshPosts)
+        ? freshPosts.filter((post) => post?.idPost)
+        : [];
+      setPosts(validatedPosts);
     }
+  };
+
+  const handleUpdatePost = (updatedPost) => {
+    if (!updatedPost?.idPost) return; // Validation cruciale
+
+    setPosts((prevPosts) => {
+      if (!Array.isArray(prevPosts)) return [];
+      return prevPosts.map((post) =>
+        post?.idPost === updatedPost.idPost ? updatedPost : post
+      );
+    });
   };
 
   return (
     <div className="md:px-20 px-8 relative py-4 md:pt-5 mt-20 flex flex-col md:flex-row gap-6">
       {/* Sidebar Filters */}
-      <div className="md:w-1/5 bg-gray-50/50 dark:bg-slate-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 h-fit sticky top-20 ">
+      <div className="md:w-1/5 bg-gray-50/50 dark:bg-slate-800 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-slate-700 h-fit sticky top-20">
         <h2 className="font-bold text-lg mb-4 dark:text-white">Filtres</h2>
 
         {/* Search Bar */}
@@ -159,7 +194,7 @@ const Community = () => {
                       showUserPosts: !filters.showUserPosts,
                     })
                   }
-                  className="rounded text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 focus:border-purple-500 dark:focus:border-purple-500 hover:border-purple-400 dark:hover:border-purple-400 transition-colors duration-200 "
+                  className="rounded text-purple-600 focus:ring-purple-500 border-gray-300 dark:border-gray-600 focus:border-purple-500 dark:focus:border-purple-500 hover:border-purple-400 dark:hover:border-purple-400 transition-colors duration-200"
                 />
                 <span className="dark:text-gray-300">Mes posts</span>
               </label>
@@ -212,13 +247,14 @@ const Community = () => {
           </div>
         ) : (
           <>
-            <div className=" text-gray-500 dark:text-gray-400">
+            <div className="text-gray-500 dark:text-gray-400">
               {filteredPosts.length} post{filteredPosts.length !== 1 ? "s" : ""}{" "}
               trouvé{filteredPosts.length !== 1 ? "s" : ""}
             </div>
             <UserPostList
               posts={filteredPosts}
               onDeletePost={handleDeletePost}
+              onUpdate={handleUpdatePost}
             />
           </>
         )}

@@ -1,5 +1,10 @@
 /* eslint-disable react/prop-types */
-import { ClockIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  ClockIcon,
+  PencilIcon,
+  TrashIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { addComment, fetchComments } from "../services/postService";
@@ -10,6 +15,7 @@ import CommentForm from "./CommentForm";
 import ConfirmationModal from "./ConfirmationModal";
 import LikeButton from "./LikeButton";
 import Loader from "./Loader";
+import UpdatePostModal from "./UpdatePostModal";
 
 const UserPostModal = ({
   post,
@@ -26,6 +32,7 @@ const UserPostModal = ({
   const [isLoadingComments, setIsLoadingComments] = useState(true);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
   const isAuthor = user?.$id === post?.author.id;
 
@@ -58,7 +65,15 @@ const UserPostModal = ({
         token
       );
       setComments((prev) => [newComment, ...prev]);
-      if (onUpdate) onUpdate();
+
+      // Mise à jour optimiste du post parent
+      if (onUpdate) {
+        const updatedPost = {
+          ...post,
+          comments: [...(post.comments || []), newComment],
+        };
+        onUpdate(updatedPost);
+      }
     } catch (err) {
       console.error("Failed to add comment:", err);
       throw err;
@@ -71,12 +86,18 @@ const UserPostModal = ({
     setIsDeleting(true);
     try {
       await onDelete(post.idPost);
+      onClose();
     } catch (err) {
       console.error("Delete UI error:", err);
     } finally {
       setIsDeleting(false);
       setShowDeleteConfirm(false);
     }
+  };
+
+  const openUpdateModal = (e) => {
+    e?.stopPropagation();
+    setIsUpdateModalOpen(true);
   };
 
   return (
@@ -90,16 +111,25 @@ const UserPostModal = ({
               </h2>
               <div className="flex items-center space-x-4">
                 {isAuthor && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setShowDeleteConfirm(true);
-                    }}
-                    className="text-gray-400 hover:text-red-500 transition-colors"
-                    aria-label="Delete post"
-                  >
-                    <TrashIcon className="w-5 h-5" />
-                  </button>
+                  <>
+                    <button
+                      onClick={openUpdateModal}
+                      className="text-gray-400 hover:text-blue-500 transition-colors"
+                      aria-label="Edit post"
+                    >
+                      <PencilIcon className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowDeleteConfirm(true);
+                      }}
+                      className="text-gray-400 hover:text-red-500 transition-colors"
+                      aria-label="Delete post"
+                    >
+                      <TrashIcon className="w-5 h-5" />
+                    </button>
+                  </>
                 )}
                 <button
                   onClick={onClose}
@@ -164,6 +194,17 @@ const UserPostModal = ({
           </footer>
         </div>
       </div>
+
+      {isUpdateModalOpen && (
+        <UpdatePostModal
+          post={post}
+          onClose={() => setIsUpdateModalOpen(false)}
+          onUpdate={(updatedPost) => {
+            if (onUpdate) onUpdate(updatedPost);
+            setIsUpdateModalOpen(false);
+          }}
+        />
+      )}
 
       <ConfirmationModal
         isOpen={showDeleteConfirm}
