@@ -102,6 +102,7 @@ const Chatbot = () => {
             <div className="flex items-center bg-slate-200 dark:bg-slate-700 rounded-full px-4 w-full focus-within:ring focus-within:ring-purple-500 focus-within:bg-slate-100 dark:focus-within:bg-slate-600">
               <input
                 type="text"
+                name="bot"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="How are you feeling today?"

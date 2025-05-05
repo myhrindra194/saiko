@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import Loader from "../components/Loader";
 import ToastError from "../components/ToastError";
 import { AuthContext } from "../context/AuthContext";
-import { authenticateUser } from "../services/auth";
+import { authenticateUser } from "../services/authService";
 
 const LoginModal = ({ closeModal, openRegisterModal }) => {
   const [user, setUser] = useState({ email: "", password: "" });
@@ -34,9 +34,9 @@ const LoginModal = ({ closeModal, openRegisterModal }) => {
     try {
       const res = await authenticateUser(user.email, user.password);
       if (res.success) {
-        await login(res.data);
+        login(res.data);
         closeModal();
-        navigate("/dashboard");
+        navigate("/community");
       } else {
         setError("Password or email invalid");
       }
@@ -100,7 +100,8 @@ const LoginModal = ({ closeModal, openRegisterModal }) => {
           </div>
           <button
             type="submit"
-            className="w-full flex justify-center items-center bg-purple-700 text-white p-2 rounded-lg hover:bg-purple-600 hover:ring-1 hover:ring-purple-500"
+            className="w-full flex justify-center items-center bg-purple-700 text-white p-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={!user.email.trim() || !user.password.trim() || isLoading}
           >
             {isLoading ? <Loader /> : "Login"}
           </button>

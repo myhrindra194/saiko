@@ -1,38 +1,20 @@
-// src/hooks/useAuth.js
-import { useEffect, useState } from "react";
-import { checkSession, logoutUser } from "../services/auth";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const useAuth = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const context = useContext(AuthContext);
 
-  const login = (userData) => {
-    setUser(userData);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+
+  return {
+    user: context.user,
+    token: context.token,
+    loading: context.loading,
+    login: context.login,
+    logout: context.logout,
   };
-
-  const logout = async () => {
-    await logoutUser();
-    setUser(null);
-  };
-
-  useEffect(() => {
-    const verifySession = async () => {
-      try {
-        const { success, data } = await checkSession();
-        if (success) {
-          setUser(data);
-        }
-      } catch (error) {
-        console.error("Session verification failed:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    verifySession();
-  }, []);
-
-  return { user, loading, login, logout };
 };
 
 export default useAuth;
