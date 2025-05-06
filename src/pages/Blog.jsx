@@ -2,10 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import PostCard from "../components/PostCard";
 import PostCardSkeleton from "../components/PostCardSkeleton";
-<<<<<<< HEAD
 import ScrollToTopButton from "../components/ScrollToTopButton";
-=======
->>>>>>> a72ed3c (Solve conflict)
 import { sortPostsByDate } from "../utils/function";
 
 const Blog = () => {
@@ -14,10 +11,6 @@ const Blog = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [initialLoading, setInitialLoading] = useState(true);
-<<<<<<< HEAD
-=======
-  const [showScrollButton, setShowScrollButton] = useState(false);
->>>>>>> a72ed3c (Solve conflict)
   const [filter, setFilter] = useState("recent");
   const [selectedSource, setSelectedSource] = useState("all");
   const postsPerPage = 5;
@@ -25,7 +18,12 @@ const Blog = () => {
 
   useEffect(() => {
     let uri = import.meta.env.VITE_NEWSAPI;
-    fetch(uri)
+    fetch(uri, {
+      headers: {
+        "User-Agent": "SaÏko/1.0",
+        Accept: "application/json",
+      },
+    })
       .then((res) => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
@@ -103,10 +101,6 @@ const Blog = () => {
     ? [...new Set(posts.map((post) => post?.source?.name).filter(Boolean))]
     : [];
 
-<<<<<<< HEAD
-=======
-  // Generate skeleton array for initial loading
->>>>>>> a72ed3c (Solve conflict)
   const skeletonArray = Array.from({ length: 6 }, (_, i) => i);
 
   return (

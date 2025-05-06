@@ -75,11 +75,7 @@ const NavBar = () => {
               {user ? (
                 <>
                   <NavLink
-<<<<<<< HEAD
                     to="/community"
-=======
-                    to="/"
->>>>>>> a72ed3c (Solve conflict)
                     className={({ isActive }) =>
                       `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
                         isActive
