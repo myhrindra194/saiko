@@ -24,10 +24,10 @@ const Blog = () => {
         return res.json();
       })
       .then((data) => {
-        if (!data.articles || !Array.isArray(data.articles)) {
+        if (!data.articles) {
           throw new Error("Invalid data format: articles is not an array");
         }
-        setPosts(data.articles || []);
+        setPosts(data.articles);
         setVisiblePosts(data.articles.slice(0, postsPerPage));
         setInitialLoading(false);
       })

@@ -66,7 +66,6 @@ const UserPostModal = ({
       );
       setComments((prev) => [newComment, ...prev]);
 
-      // Mise à jour optimiste du post parent
       if (onUpdate) {
         const updatedPost = {
           ...post,

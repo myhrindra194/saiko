@@ -1,13 +1,14 @@
 // src/App.jsx
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { ThemeProvider } from "./hooks/useTheme";
-import Chatbot from "./layout/Chatbot";
 import ProtectedRoute from "./layout/ProtectedRoute";
 import Root from "./layout/Root";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
+import Chatbot from "./pages/Chatbot";
 import Community from "./pages/Community";
 import Home from "./pages/Home";
+import Psy from "./pages/Psy";
 import Service from "./pages/Service";
 import { AuthProvider } from "./provider/AuthProvider";
 
@@ -38,6 +39,14 @@ const App = () => {
           element: (
             <ProtectedRoute>
               <Community />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/psy",
+          element: (
+            <ProtectedRoute>
+              <Psy />
             </ProtectedRoute>
           ),
         },

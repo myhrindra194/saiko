@@ -98,6 +98,18 @@ const NavBar = () => {
                   >
                     CHATBOT
                   </NavLink>
+                  <NavLink
+                    to="/psy"
+                    className={({ isActive }) =>
+                      `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
+                        isActive
+                          ? "text-purple-600 font-medium"
+                          : "text-inherit"
+                      }`
+                    }
+                  >
+                    PSY
+                  </NavLink>
 
                   <NavLink
                     to="/blog"
@@ -233,6 +245,19 @@ const NavBar = () => {
               {user ? (
                 <>
                   <NavLink
+                    to="/community"
+                    className={({ isActive }) =>
+                      `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer ${
+                        isActive
+                          ? "text-purple-600 font-medium"
+                          : "text-inherit"
+                      }`
+                    }
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    COMMUNITY
+                  </NavLink>
+                  <NavLink
                     to="/chatbot"
                     className={({ isActive }) =>
                       `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer ${
@@ -246,17 +271,16 @@ const NavBar = () => {
                     CHATBOT
                   </NavLink>
                   <NavLink
-                    to="/"
+                    to="/psy"
                     className={({ isActive }) =>
-                      `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer ${
+                      `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-4xl cursor-pointer ${
                         isActive
                           ? "text-purple-600 font-medium"
                           : "text-inherit"
                       }`
                     }
-                    onClick={() => setIsMenuOpen(false)}
                   >
-                    VOCAL
+                    PSY
                   </NavLink>
                   <NavLink
                     to="/blog"
@@ -270,19 +294,6 @@ const NavBar = () => {
                     onClick={() => setIsMenuOpen(false)}
                   >
                     BLOG
-                  </NavLink>
-                  <NavLink
-                    to="/community"
-                    className={({ isActive }) =>
-                      `px-3 py-1.5 dark:hover:bg-slate-600/50 hover:bg-slate-200/40 rounded-xl cursor-pointer ${
-                        isActive
-                          ? "text-purple-600 font-medium"
-                          : "text-inherit"
-                      }`
-                    }
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    COMMUNITY
                   </NavLink>
                 </>
               ) : (

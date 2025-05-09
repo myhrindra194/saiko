@@ -21,16 +21,16 @@ const UpdatePostModal = ({ post, onClose, onUpdate }) => {
     try {
       setIsUpdating(true);
 
-      // Étape 1: Validation du contenu avec Gemini
       const isValid = await validatePostWithGemini(content, token);
 
       if (!isValid) {
-        toast.error("Le contenu ne respecte pas les guidelines");
+        toast.error(
+          "Le contenu ne respecte pas les valeurs de notre plateforme"
+        );
         setContent("");
         return;
       }
 
-      // Étape 2: Mise à jour optimiste
       const optimisticUpdate = {
         ...post,
         content,
@@ -56,7 +56,6 @@ const UpdatePostModal = ({ post, onClose, onUpdate }) => {
         toast.error(`Validation error: ${error.response.data.error}`);
       } else {
         toast.error(error.message || "Échec de la mise à jour du post");
-        // Annulation de la mise à jour optimiste
         onUpdate(post);
       }
     } finally {

@@ -1,0 +1,635 @@
+[
+    {
+        "onpm": "ONPM : 001-18",
+        "nom": "AndriamalANDY Mialy",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "TANA WATERFRONT BÂTIMENT CENTRAL ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile",
+            "Disponible en soirée après 18h",
+            "Disponible le samedi",
+            "Disponible le dimanche"
+        ],
+        "telephone": "+261 34 33 993 38",
+        "email": "andriamalandymialy@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 002-18",
+        "nom": "Dr Andrianaivo Razafindramaka Razafimanjato Victorine",
+        "specialite": "Psychologue",
+        "adresse": "CABINET HUMANA-E AMBOLOKANDRINA            ANTANANARIVO",
+        "disponibilites": [
+            "+261 33 01 817 63"
+        ],
+        "telephone": "+261 33 01 817 63",
+        "email": "vicandrianaivo@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 003-18",
+        "nom": "Dr Andrianilaina Koloina",
+        "specialite": "Psychologue clinicienne - Psychothérapeute",
+        "adresse": "CENTRE MULTIPLEX ANDROHIBE ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne"
+        ],
+        "telephone": "+261 33 07 468 81",
+        "email": "kolooina@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 004-18",
+        "nom": "Andrianjara Nirina",
+        "specialite": "Psychologue clinicienne - Psychothérapeute",
+        "adresse": "LOT AVB 77 AVARABOHITRA ITAOSY  ANTANANARIVO",
+        "disponibilites": [
+            "+261 34 27 503 36"
+        ],
+        "telephone": "+261 34 27 503 36",
+        "email": "nirina.andrianjara@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 005-18",
+        "nom": "Andrianoelison Hery Miadana",
+        "specialite": "Psychologue - Psychothérapeute",
+        "adresse": "CABINET DE PSYCHOLOGIE SOCIALE IVATO ANTANANARIVO",
+        "disponibilites": [
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 58 537 55",
+        "email": "herymiadana@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 006-18",
+        "nom": "Rajaonarivony Rabarison Holitiana",
+        "specialite": "Psychologue clinicienne - Psychothérapeute",
+        "adresse": "ANTANANARIVO",
+        "disponibilites": [
+            "+261 34 91 820 80",
+            "+261 33 91 820 80"
+        ],
+        "telephone": "+261 33 91 820 80",
+        "email": "holitiana.rabarisonanja@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 007-18",
+        "nom": "Dr Rakotomalala Olivier",
+        "specialite": "Psychologue",
+        "adresse": "UNIVERSITE CATHOLIQUE DE MADAGASCAR AMBATOROKA ANTANANARIVO",
+        "disponibilites": [
+            "+261 32 41 624 90",
+            "+261 34 14 001 08"
+        ],
+        "telephone": "+261 34 14 001 08",
+        "email": "rakotomalalaoliviert@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 009-18",
+        "nom": "Rambinintsoa Hajo Miora",
+        "specialite": "Psychologue organisationnelle",
+        "adresse": "SOAVIMASOANDRO ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile",
+            "Disponible en soirée après 18h",
+            "Consultation en anglais"
+        ],
+        "telephone": "+261 33 08 053 09",
+        "email": "hajomiora@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 010-18",
+        "nom": "Randriamanana Kolo",
+        "specialite": "Psychologue clinicienne - Psychothérapeute -\nPsychologue en milieux éducatif et organisationnel",
+        "adresse": "CABINET K’s 4 Mindshift, TSIADANA, PRES DE LA CLINIQUE MPITSABO MIKAMBANA MM24",
+        "disponibilites": [
+            "Disponible en ligne"
+        ],
+        "telephone": "+261 32 94 900 60",
+        "email": "randriamanana.k4m@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 011-18",
+        "nom": "Randrianarisoa Ny Andy",
+        "specialite": "Psychologue - Psychothérapeute",
+        "adresse": "IVANDRY                                          ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 14 650 52",
+        "email": "ravandisoa@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 012-18",
+        "nom": "Randrianavahy Samy",
+        "specialite": "Psychologue",
+        "adresse": "CADIS SOAVIMBAHOAKA ANTANANARIVO",
+        "disponibilites": [
+            "+261 34 40 175 68"
+        ],
+        "telephone": "+261 34 40 175 68",
+        "email": "samyrandrianavahy@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 013-18",
+        "nom": "Ratsifandrihamanana Lisy Zarasoa",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "ORCHIDEES BLANCHES ANDROHIBE ANTANANARIVO",
+        "disponibilites": [
+            "+261 32 44 212 00"
+        ],
+        "telephone": "+261 32 44 212 00",
+        "email": "lisy.zarasoa@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 014-18",
+        "nom": "Dr Razafimbola Sandimampita",
+        "specialite": "Psychologue - Psychothérapeute​",
+        "adresse": "DEPARTEMENT PSYCHOLOGIE SOCIALE, UNIVERSITE D’ANTANANARIVO – FARAVOHITRA",
+        "disponibilites": [
+            "Consultation en anglais"
+        ],
+        "telephone": "+261 34 76 679 18",
+        "email": "rsandimampita@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 015-18",
+        "nom": "Razafindrabe Ndrianarifera Ashley",
+        "specialite": "Psychologue clinicienne - Psychothérapeute",
+        "adresse": "AMPANDRANA                              ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne"
+        ],
+        "telephone": "+261 33 12 301 85",
+        "email": "ashley.razafindrabe@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 016-18",
+        "nom": "Razakamanana Andry",
+        "specialite": "Psychologue",
+        "adresse": "",
+        "disponibilites": [
+            "+1-873-339-3363 (WhatsApp)",
+            "Andry N. Razakamanana"
+        ],
+        "telephone": "+1-873-339-3363 (WhatsApp)",
+        "email": "arazakamanana3@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 017-18",
+        "nom": "Razakandrainy Aina",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "HOPITAL ANJANAMASINA             ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 14 203 33",
+        "email": "razakandrainyh@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 018-19",
+        "nom": "Andriamiharimanana Hoby",
+        "specialite": "Psychologue",
+        "adresse": "– Consultation les jours ouvrables : POLYCLINIQUE ILAFY, BEHORIRIKA ET ALHAMBRA ANKADIMBAHOAKA",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible en soirée après 18h",
+            "Disponible le samedi",
+            "Disponible le dimanche"
+        ],
+        "telephone": "+261 34 01 915 78",
+        "email": "hobyll94@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 019-19",
+        "nom": "Rakotondratsimba Tahiry",
+        "specialite": "Psychologue",
+        "adresse": "",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible en soirée après 18h"
+        ],
+        "telephone": "+261 34 43 453 59",
+        "email": ""
+    },
+    {
+        "onpm": "ONPM : 020-19",
+        "nom": "Andrianasolo Lanto",
+        "specialite": "Psychologue",
+        "adresse": "AMBOHIMANGAKELY                   ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne"
+        ],
+        "telephone": "+261 34 86 936 88",
+        "email": "lantoharimamy64@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 022-19",
+        "nom": "Andriamanantena Gio",
+        "specialite": "Psychologue organisationnel",
+        "adresse": "",
+        "disponibilites": [
+            "+261 34 07 110 07"
+        ],
+        "telephone": "+261 34 07 110 07",
+        "email": "gio.andriamanantena@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 023-19",
+        "nom": "Rakotondrasoa Sitraka",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "AMBATOROKA (APRES CLINIQUE ST-PAUL)     ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 70 051 60",
+        "email": "sitrakarivo_rakoto@yahoo.com"
+    },
+    {
+        "onpm": "ONPM : 024-19",
+        "nom": "Randriamorasoa Saraha",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible en soirée après 18h"
+        ],
+        "telephone": "+261 34 77 673 87",
+        "email": "sarahamalala40@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 025-19",
+        "nom": "Rafidison Karine",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "AMBOHIMANARINA ANTANANARIVO",
+        "disponibilites": [
+            "+261 34 50 609 30"
+        ],
+        "telephone": "+261 34 50 609 30",
+        "email": "miranakarinerafision@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 026-20",
+        "nom": "Rajaonalisoa Njara",
+        "specialite": "Psychologue organisationel",
+        "adresse": "",
+        "disponibilites": [
+            "+261 34 72 350 87"
+        ],
+        "telephone": "+261 34 72 350 87",
+        "email": "rajaonalisoanjara@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 027-20",
+        "nom": "Rabenoro Mihaja",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 61 886 19",
+        "email": "rabemih@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 030-20",
+        "nom": "Rakotondrazanany Laurencia Stacy",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 32 07 243 06",
+        "email": "rlaurenciastacy@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 031-20",
+        "nom": "Randrianarisoa Alice",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "IVATO AMBOHIDRATRIMO ANTANANARIVO",
+        "disponibilites": [
+            "+261 34 64 509 22"
+        ],
+        "telephone": "+261 34 64 509 22",
+        "email": "alice@fafy.mg"
+    },
+    {
+        "onpm": "ONPM : 032-20",
+        "nom": "Dr Hassim Yvana",
+        "specialite": "Docteure en Psychologie sociale et Professeure à l’Université Paris 8",
+        "adresse": "EDEN GALLERY ANKORONDRANO ANTANANARIVO",
+        "disponibilites": [
+            "+261 20 22 663 42"
+        ],
+        "telephone": "+261 20 22 663 42",
+        "email": ""
+    },
+    {
+        "onpm": "ONPM : 033-20",
+        "nom": "Ravelonarivo Rason Mihanta",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "CENTRE MEDICAL AMBATOMENA TSARALALANA",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 52 060 55",
+        "email": "miirrja@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 034-20",
+        "nom": "Ramiandrisoa James Samuel Miora",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "AMBONDRONA                             ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile"
+        ],
+        "telephone": "+261 32 88 576 74",
+        "email": "mirindra.contact@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 035-20",
+        "nom": "Ratefinanahary Irina",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "ITAOSY CITE AKANY SAMBATRA A NTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible en soirée après 18h",
+            "Disponible le samedi",
+            "Disponible le dimanche"
+        ],
+        "telephone": "+261 34 46 704 70",
+        "email": "irinartf@hotmail.com"
+    },
+    {
+        "onpm": "ONPM : 036-21",
+        "nom": "Raveloarijaona Haritiana",
+        "specialite": "Psychologue organisationel",
+        "adresse": "LYCEE SAINT CHAMPAGNAT ANATIHAZO ISOTRY, ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile",
+            "Disponible en soirée après 18h",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 81 297 56",
+        "email": "tianamike@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 037-21",
+        "nom": "Randrianjanaka Carine",
+        "specialite": "Psychologue organisationnelle",
+        "adresse": "ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en soirée après 18h"
+        ],
+        "telephone": "+261 34 13 480 65",
+        "email": "carine.randrianjanaka@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 039-21",
+        "nom": "Rakotondramanana Bryan",
+        "specialite": "Psychologue organisationnel",
+        "adresse": "ANTANANARIVO",
+        "disponibilites": [],
+        "telephone": "",
+        "email": "bryanrakz01@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 040-22",
+        "nom": "Ramasiarisolo Faliavo Larissa",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "HOPITAL SAINT BENOÎT MENNI IMERINTSIATOSIKA MAROHOHO TSIMBAZAZA",
+        "disponibilites": [
+            "Disponible en ligne"
+        ],
+        "telephone": "+261 34 41 914 70",
+        "email": "larissa.ramasiarisolo@yahoo.com"
+    },
+    {
+        "onpm": "ONPM : 041-22",
+        "nom": "Dr Ratsimivony Jean-Claude",
+        "specialite": "Psychologue clinicien",
+        "adresse": "CENTRE MEDICAL HOLISTIQUE JCR ANTSAKAVIRO ANTANANARIVO",
+        "disponibilites": [
+            "+261 33 11 830 46",
+            "+261 34 02 830 46"
+        ],
+        "telephone": "+261 34 02 830 46",
+        "email": "jeclra@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 043-22",
+        "nom": "Ravelonjatovo Ratsimandisa Nomena",
+        "specialite": "Psychologue organisationnel",
+        "adresse": "Enceinte Tranovola Appart’hôtel",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible en soirée après 18h",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 38 09 333 54+261 37 74 359 72",
+        "email": "nomena.psy@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 044-22",
+        "nom": "Ranaivo Rasata Fy Mendrika",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "SOAMANANDRARINY ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile",
+            "Disponible en soirée après 18h",
+            "Disponible le samedi",
+            "Consultation en anglais"
+        ],
+        "telephone": "+261 34 25 189 82",
+        "email": "fymendrika03@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 045-23",
+        "nom": "Focard Marie-Jo",
+        "specialite": "Psychologue du travail",
+        "adresse": "ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne"
+        ],
+        "telephone": "+33 6 83 54 46 85 (WhatsApp)",
+        "email": "mjfocard@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 046-23",
+        "nom": "Manorintsoa Ny Avo Guyor Hasimaro",
+        "specialite": "Psychologue Clinicien",
+        "adresse": "CABINET DE PSYCHOLOGIE ET DE PSYCHOTHERAPIE 67HA CENTRE OUEST ANTANANARIVO",
+        "disponibilites": [
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 32 61 113 40​",
+        "email": "psynyavo@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 047-23",
+        "nom": "Rarivoson Aurélien",
+        "specialite": "Psychologue Clinicien",
+        "adresse": "ANTANANARIVO",
+        "disponibilites": [
+            "+261 38 90  421 69",
+            "+261 32 64 271 74"
+        ],
+        "telephone": "+261 32 64 271 74",
+        "email": "tsikitsiky.ra@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 048-23",
+        "nom": "Ranaivoarindrina Natacha",
+        "specialite": "Psychologue Clinicienne",
+        "adresse": "WELLNESS CORNER NANISANA ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible en soirée après 18h",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 32 30 572 81",
+        "email": "ranaivoari.natacha@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 051-24",
+        "nom": "Razafitrimo Iavosoa Ericah",
+        "specialite": "Psychologue Clinicienne",
+        "adresse": "ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne"
+        ],
+        "telephone": "+261 32 89 994 62",
+        "email": "razafitrimo.ericah@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 053-24",
+        "nom": "Andriamaromanana Annie Henintsoa",
+        "specialite": "Psychologue Clinicienne",
+        "adresse": "ANDRANOMENA                            ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 37 26 642 15",
+        "email": "andriamarohenintsoa@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 054-24",
+        "nom": "Rajaonarivelo Taniah",
+        "specialite": "Psychologue Clinicienne",
+        "adresse": "ANTANANARIVO",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile"
+        ],
+        "telephone": "+261 34 69 193 95",
+        "email": "taniah.rajaonarivelo@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 028-20",
+        "nom": "Ratsifandrihamanana Meva",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "TOAMASINA",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 10 522 87",
+        "email": "kevrakoto@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 028-20",
+        "nom": "Ratsifandrihamanana Meva",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "TOAMASINA",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 26 601 53",
+        "email": "mevatianaratsif@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 029-20",
+        "nom": "Rakotoarisoa Stéphanie Marielle",
+        "specialite": "Psychologue clinicienne",
+        "adresse": "TOAMASINA",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile",
+            "Disponible en soirée après 18h",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 67 802 54",
+        "email": "stephaniemarielle95@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 038-21",
+        "nom": "Randriambololona Landry",
+        "specialite": "Psychologue clinicien",
+        "adresse": "FIANARANTSOA",
+        "disponibilites": [
+            "+261 34 67 012 28"
+        ],
+        "telephone": "+261 34 67 012 28",
+        "email": "rlandrymariepierre@yahoo.fr"
+    },
+    {
+        "onpm": "ONPM : 042-22",
+        "nom": "Rakotonarivo Miadana Océane",
+        "specialite": "Psychologue organisationelle",
+        "adresse": "ANTSIRABE",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 85 073 55",
+        "email": "oceane.hariniaina@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 049-23",
+        "nom": "Ratsimbazafy Jean François",
+        "specialite": "Psychologue clinicien - Psychothérapeute",
+        "adresse": "ANTSIRABE",
+        "disponibilites": [
+            "Consultation en anglais et italien"
+        ],
+        "telephone": "+261 34 61 123 09",
+        "email": "tsilaoela@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 050-24",
+        "nom": "Ranaivoson Kiady",
+        "specialite": "Psychologue organisationel",
+        "adresse": "MAHAJANGA",
+        "disponibilites": [
+            "Disponible en ligne",
+            "Visite à domicile",
+            "Disponible en soirée après 18h",
+            "Disponible le samedi"
+        ],
+        "telephone": "+261 34 66 222 46",
+        "email": "ranaivosonkiady@gmail.com"
+    },
+    {
+        "onpm": "ONPM : 052-24",
+        "nom": "Mirija Kevin",
+        "specialite": "Psychologue clinicien",
+        "adresse": "ANTSIRABE",
+        "disponibilites": [
+            "+261 34 10 522 87"
+        ],
+        "telephone": "+261 34 10 522 87",
+        "email": "kevrakoto@gmail.com"
+    }
+]
