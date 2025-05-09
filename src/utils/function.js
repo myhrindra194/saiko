@@ -69,3 +69,4 @@ export const applyAllFilters = (data, { searchTerm, region, disponibilite }) => 
   result = filterByDisponibilite(result, disponibilite);
   return result;
 };
+
