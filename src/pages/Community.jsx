@@ -23,6 +23,8 @@ const Community = () => {
     sortBy: "newest",
   });
 
+  
+
   useEffect(() => {
     const loadPosts = async () => {
       try {
@@ -45,10 +47,7 @@ const Community = () => {
   }, [token]);
 
   useEffect(() => {
-    applyFilters();
-  }, [posts, searchTerm, filters]);
-
-  const applyFilters = () => {
+    const applyFilters = () => {
     // Ajout d'une vérification de sécurité
     if (!Array.isArray(posts)) {
       setFilteredPosts([]);
@@ -87,7 +86,10 @@ const Community = () => {
     });
 
     setFilteredPosts(result);
-  };
+    };
+
+    applyFilters();
+  }, [posts, searchTerm, filters, user]);
 
   const handleSubmitPost = async (content, isAnonymous) => {
     try {

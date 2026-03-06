@@ -1,30 +1,23 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export const validatePostWithGemini = async (text) => {
-    try {
-      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-      const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-pro-latest",
-        apiVersion: "v1",
-      });
+  try {
+    const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
-      const prompt = `Ce post est-il approprié pour une communauté bienveillante ? Réponds uniquement par "true" ou "false".
-      
-      Critères de rejet:
-      - Langage offensant ou insultes
-      - Conseils dangereux ou illégaux
-      - Harcèlement ou discrimination
-      - Contenu explicite ou NSFW
-      
-      Post: "${text}"`;
+    // On utilise le nom le plus stable et compatible au monde
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-      const result = await model.generateContent(prompt);
-      const response = result.response;
-      const textResponse = response.text().trim().toLowerCase();
+    const prompt = `Réponds UNIQUEMENT par "true" si ce texte est bienveillant, sinon "false": "${text}"`;
 
-      return textResponse === "true";
-    } catch (error) {
-      console.error("Erreur avec l'API Gemini:", error);
-      return false;
-    }
-  };
+    const result = await model.generateContent(prompt);
+    const response =  result.response;
+    const textResponse = response.text().trim().toLowerCase();
+    
+
+    return textResponse.includes("true");
+  } catch (error) {
+    // Si même là ça échoue, on log l'erreur pour comprendre
+    console.error("Détails de l'erreur Gemini:", error);
+    return false;
+  }
+};
