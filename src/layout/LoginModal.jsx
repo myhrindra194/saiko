@@ -33,6 +33,8 @@ const LoginModal = ({ closeModal, openRegisterModal }) => {
     setIsLoading(true);
     try {
       const res = await authenticateUser(user.email, user.password);
+      console.log(res);
+      
       if (res.success) {
         login(res.data);
         closeModal();

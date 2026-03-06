@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext";
 
 const UserDropdown = ({ user }) => {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen,setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const { logout } = useContext(AuthContext);
 
@@ -15,6 +15,9 @@ const UserDropdown = ({ user }) => {
     setIsOpen(false);
     navigate("/");
   };
+
+
+  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -36,7 +39,7 @@ const UserDropdown = ({ user }) => {
         type="button"
         onClick={() => setIsOpen(!isOpen)}
       >
-        {user?.name.charAt(0).toUpperCase()}
+        {user?.user_metadata?.full_name ? user.user_metadata.full_name.charAt(0).toUpperCase() : "U"}
       </button>
 
       <div

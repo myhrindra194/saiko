@@ -1,37 +1,31 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { checkSession, logoutUser } from "../services/authService";
+import supabase from "../config/supabase";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const getSessionToken = () => {
-    try {
-      const cookieFallback = localStorage.getItem("cookieFallback");
-      if (!cookieFallback) return null;
-
-      const parsed = JSON.parse(cookieFallback);
-      const sessionKey = `a_session_${
-        import.meta.env.VITE_APPWRITE_PROJECT_ID
-      }`;
-      return parsed[sessionKey] || null;
-    } catch (error) {
-      console.error("Error getting session token:", error);
-      return null;
+  const syncSession = (session) => {
+    if (session?.user) {
+      setUser(session.user);
+      setToken(session.access_token);
+    } else {
+      setUser(null);
+      setToken(null);
     }
   };
 
   const login = async () => {
     setLoading(true);
     try {
-      const session = await checkSession();
-      if (session.success) {
-        setUser(session.data);
-        setToken(getSessionToken());
-      }
+      const { data: { session }, error } = await supabase.auth.getSession();
+      if (error) throw error;
+      syncSession(session);
+    } catch (err) {
+      console.error("Login check failed:", err);
     } finally {
       setLoading(false);
     }
@@ -40,32 +34,36 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     setLoading(true);
     try {
-      await logoutUser();
-      setUser(null);
-      setToken(null);
-    } catch (error) {
-      console.error("Logout failed:", error);
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      syncSession(null);
+    } catch (err) {
+      console.error("Logout failed:", err);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    const verifySession = async () => {
+    const init = async () => {
       try {
-        const { success, data } = await checkSession();
-        if (success) {
-          setUser(data);
-          setToken(getSessionToken());
-        }
-      } catch (error) {
-        console.error("Session verification failed:", error);
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (!error) syncSession(session);
+      } catch (err) {
+        console.error("Initial session read failed:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    verifySession();
+    init();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      syncSession(session);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   return (
