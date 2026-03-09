@@ -13,7 +13,7 @@ const Home = () => {
     };
   }, []);
 
-  return <Banner />;
+  return <div className="flex-grow flex flex-col justify-end"><Banner /></div>;
 };
 
 export default Home;
