@@ -4,6 +4,7 @@ import PostCard from "../components/PostCard";
 import PostCardSkeleton from "../components/PostCardSkeleton";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import { sortPostsByDate } from "../utils/function";
+import { fetchMentalHealthNews } from "../services/newService";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -17,25 +18,21 @@ const Blog = () => {
   const observerTarget = useRef(null);
 
   useEffect(() => {
-    let uri = import.meta.env.VITE_NEWSAPI;
-    fetch(uri)
-      .then((res) => {
-        if (!res.ok) throw new Error("Network response was not ok");
-        return res.json();
-      })
-      .then((data) => {
-        if (!data.articles || !Array.isArray(data.articles)) {
-          throw new Error("Invalid data format: articles is not an array");
-        }
-        setPosts(data.articles || []);
-        setVisiblePosts(data.articles.slice(0, postsPerPage));
-        setInitialLoading(false);
-      })
-      .catch((error) => {
-        console.error("Fetch error:", error);
+    const loadNews = async () => {
+      setInitialLoading(true);
+      try {
+        const articles = await fetchMentalHealthNews();
+        setPosts(articles);
+        setVisiblePosts(articles.slice(0, postsPerPage));
+      } catch (error) {
         setPosts([]);
+        throw error;
+      } finally {
         setInitialLoading(false);
-      });
+      }
+    };
+
+    loadNews();
   }, []);
 
   useEffect(() => {
@@ -96,7 +93,7 @@ const Blog = () => {
     ? [...new Set(posts.map((post) => post?.source?.name).filter(Boolean))]
     : [];
 
-  const skeletonArray = Array.from({ length: 6 }, (_, i) => i);
+  const skeletonArray = Array.from({ length: 12 }, (_, i) => i);
 
   return (
     <div className="md:px-20 px-8 relative py-4 md:pt-5 mt-20">
