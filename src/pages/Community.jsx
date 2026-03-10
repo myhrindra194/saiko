@@ -70,8 +70,8 @@ const Community = () => {
     result = result.filter((post) => {
       if (!post?.author) return false;
       if (post.isAnonymous && !filters.showAnonymous) return false;
-      if (user?.$id === post.author?.id && !filters.showUserPosts) return false;
-      if (user?.$id !== post.author?.id && !filters.showOthersPosts)
+      if (user?.id === post.author?.id && !filters.showUserPosts) return false;
+      if (user?.id !== post.author?.id && !filters.showOthersPosts)
         return false;
       return true;
     });

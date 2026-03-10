@@ -16,12 +16,11 @@ const UpdatePostModal = ({ post, onClose, onUpdate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!content.trim() || !token || user?.$id !== post?.author.id) return;
+    if (!content.trim() || !token || user?.id !== post?.author.id) return;
 
     try {
       setIsUpdating(true);
 
-      // Étape 1: Validation du contenu avec Gemini
       const isValid = await validatePostWithGemini(content, token);
 
       if (!isValid) {
@@ -30,7 +29,6 @@ const UpdatePostModal = ({ post, onClose, onUpdate }) => {
         return;
       }
 
-      // Étape 2: Mise à jour optimiste
       const optimisticUpdate = {
         ...post,
         content,

@@ -2,56 +2,55 @@ import { HandRaisedIcon } from "@heroicons/react/16/solid";
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import { useEffect, useRef, useState } from "react";
 
+import { sendToChatbot } from "../services/chatService";
+
 const Chatbot = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello, I'm your mental health companion. How are you feeling today?",
+      text: "Bonjour, Je suis votre assistant virtuel, prêt à vous aider avec vos questions sur la santé mentale. N'hésitez pas à me poser vos questions !",
       sender: "bot",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef(null);
+  const [isTyping, setIsTyping] = useState(false);
 
-  const getBotResponse = (userMessage) => {
-    const responses = {
-      hello: "I'm here to listen. How has your day been?",
-      anxious:
-        "Try the 5-4-3-2-1 technique: Name 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, 1 you can taste.",
-      sad: "Your feelings are valid. Would you like to share more?",
-      stress:
-        "Break things into smaller steps. What's one small thing that might help?",
-      sleep:
-        "Try 4-4-6 breathing: Inhale 4s, hold 4s, exhale 6s. Repeat 5 times.",
-    };
-    return (
-      responses[userMessage.toLowerCase()] ||
-      "I'm listening. Could you tell me more?"
-    );
+ const handleSend = async (e) => {
+  e.preventDefault();
+  if (!inputValue.trim() || isTyping) return;
+
+  const userMessage = {
+    id: Date.now(),
+    text: inputValue,
+    sender: "user",
   };
 
-  const handleSend = (e) => {
-    e.preventDefault();
-    if (!inputValue.trim()) return;
+  setMessages((prev) => [...prev, userMessage]);
+  const currentInput = inputValue; 
+  setInputValue("");
+  setIsTyping(true);
 
-    const userMessage = {
-      id: Date.now(),
-      text: inputValue,
-      sender: "user",
+  try {
+    const data = await sendToChatbot(currentInput);
+    
+    const botMessage = {
+      id: Date.now() + 1,
+      text: data.text,
+      sender: "bot",
     };
-    setMessages((prev) => [...prev, userMessage]);
-    setInputValue("");
-
-    setTimeout(() => {
-      const botMessage = {
-        id: Date.now() + 1,
-        text: getBotResponse(inputValue),
-        sender: "bot",
-      };
-      setMessages((prev) => [...prev, botMessage]);
-    }, 1200);
-  };
-
+    setMessages((prev) => [...prev, botMessage]);
+  } catch (error) {
+    setMessages((prev) => [...prev, {
+      id: Date.now() + 1,
+      text: "Désolé, je rencontre une difficulté technique. Réessayez plus tard.",
+      sender: "bot"
+    }]);
+    throw error;
+  } finally {
+    setIsTyping(false);
+  }
+};
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -62,10 +61,10 @@ const Chatbot = () => {
         <div className="flex items-center justify-center space-x-2 flex-col">
           <HandRaisedIcon className="size-10 text-purple-500 dark:text-purple-400 rotate-12 mb-3" />
           <h3 className="text-2xl text-slate-800 dark:text-slate-200 mb-2">
-            How can I help you today?
+            Comment puis-je vous aider aujourd&apos;hui ?
           </h3>
           <p className="text-slate-600 dark:text-slate-400">
-            Ready to assist you on anything you need from answering questions
+            Prêt à vous aider avec n&apos;importe quoi vous avez besoin de répondre aux questions
           </p>
         </div>
       </div>
@@ -91,6 +90,15 @@ const Chatbot = () => {
                 </div>
               </div>
             ))}
+            {isTyping && (
+            <div className="flex justify-start mb-4">
+              <div className="bg-slate-200 dark:bg-slate-700 px-4 py-3 rounded-2xl rounded-bl-none flex items-center space-x-1">
+                <span className="w-1.5 h-1.5 bg-slate-500 dark:bg-slate-400 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
+                <span className="w-1.5 h-1.5 bg-slate-500 dark:bg-slate-400 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
+                <span className="w-1.5 h-1.5 bg-slate-500 dark:bg-slate-400 rounded-full animate-bounce"></span>
+              </div>
+            </div>
+          )}
             <div ref={messagesEndRef} />
           </div>
         </div>

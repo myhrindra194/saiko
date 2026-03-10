@@ -34,7 +34,7 @@ const UserPostModal = ({
   const [isDeleting, setIsDeleting] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
-  const isAuthor = user?.$id === post?.author.id;
+  const isAuthor = user?.id === post?.author.id;
 
   useEffect(() => {
     const loadComments = async () => {
