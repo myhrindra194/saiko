@@ -8,7 +8,7 @@ const Chatbot = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello, I'm your mental health companion. How are you feeling today?",
+      text: "Bonjour, Je suis votre assistant virtuel, prêt à vous aider avec vos questions sur la santé mentale. N'hésitez pas à me poser vos questions !",
       sender: "bot",
     },
   ]);
@@ -61,10 +61,10 @@ const Chatbot = () => {
         <div className="flex items-center justify-center space-x-2 flex-col">
           <HandRaisedIcon className="size-10 text-purple-500 dark:text-purple-400 rotate-12 mb-3" />
           <h3 className="text-2xl text-slate-800 dark:text-slate-200 mb-2">
-            How can I help you today?
+            Comment puis-je vous aider aujourd&apos;hui ?
           </h3>
           <p className="text-slate-600 dark:text-slate-400">
-            Ready to assist you on anything you need from answering questions
+            Prêt à vous aider avec n&apos;importe quoi vous avez besoin de répondre aux questions
           </p>
         </div>
       </div>

@@ -16,7 +16,7 @@ const UpdatePostModal = ({ post, onClose, onUpdate }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!content.trim() || !token || user?.$id !== post?.author.id) return;
+    if (!content.trim() || !token || user?.id !== post?.author.id) return;
 
     try {
       setIsUpdating(true);

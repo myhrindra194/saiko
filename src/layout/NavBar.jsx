@@ -84,7 +84,7 @@ const NavBar = () => {
                       }`
                     }
                   >
-                    COMMUNITY
+                    COMMUNAUTE
                   </NavLink>
                   <NavLink
                     to="/chatbot"
@@ -282,7 +282,7 @@ const NavBar = () => {
                     }
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    COMMUNITY
+                    COMMUNAUTE
                   </NavLink>
                 </>
               ) : (

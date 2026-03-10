@@ -21,11 +21,11 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const isAuthor = user?.$id === post?.author.id;
+  const isAuthor = user?.id === post?.author.id;
 
   useEffect(() => {
     if (post) {
-      const userLikeStatus = post.likes?.includes(user?.$id);
+      const userLikeStatus = post.likes?.includes(user?.id);
       setIsLiked(userLikeStatus);
       setLikeCount(post.likes?.length || 0);
     }
@@ -41,9 +41,25 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
     setIsLikeLoading(true);
 
     try {
-      const updatedPost = await likePost(post.idPost, token);
-      if (onUpdate) onUpdate(updatedPost);
+      const response = await likePost(post.idPost, token);
+
+      // response is now the updated post object from the server
+      const updatedPost = response?.idPost ? response : null;
+
+      // if backend didn't return the full post for some reason, patch it manually
+      if (!updatedPost) {
+        const patched = {
+          ...post,
+          likes: newLikeStatus
+            ? [...(post.likes || []), user?.id]
+            : (post.likes || []).filter((id) => id !== user?.id),
+        };
+        if (onUpdate) onUpdate(patched);
+      } else {
+        if (onUpdate) onUpdate(updatedPost);
+      }
     } catch (err) {
+      // rollback optimistic update
       setIsLiked((prev) => !prev);
       setLikeCount((prev) => (newLikeStatus ? prev - 1 : prev + 1));
       console.error("Like error:", err);
