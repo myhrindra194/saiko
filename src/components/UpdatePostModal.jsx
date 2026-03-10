@@ -21,7 +21,6 @@ const UpdatePostModal = ({ post, onClose, onUpdate }) => {
     try {
       setIsUpdating(true);
 
-      // Étape 1: Validation du contenu avec Gemini
       const isValid = await validatePostWithGemini(content, token);
 
       if (!isValid) {
@@ -30,7 +29,6 @@ const UpdatePostModal = ({ post, onClose, onUpdate }) => {
         return;
       }
 
-      // Étape 2: Mise à jour optimiste
       const optimisticUpdate = {
         ...post,
         content,
