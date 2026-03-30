@@ -8,6 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { addComment, fetchComments } from "../services/postService";
+import { deleteComment } from "../services/commentService";
 import { formatDate } from "../utils/function";
 import Avatar from "./Avatar";
 import CommentCard from "./CommentCard";
@@ -33,6 +34,9 @@ const UserPostModal = ({
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [showDeleteCommentConfirm, setShowDeleteCommentConfirm] = useState(false);
+  const [selectedCommentId, setSelectedCommentId] = useState(null);
+  const [isDeletingComment, setIsDeletingComment] = useState(false);
 
   const isAuthor = user?.id === post?.author.id;
 
@@ -53,6 +57,23 @@ const UserPostModal = ({
 
     loadComments();
   }, [post.idPost, token]);
+
+  
+  const handleDelete = async () => {
+    if (!token || !isAuthor) return;
+
+    setIsDeleting(true);
+    try {
+      await onDelete(post.idPost);
+      onClose();
+    } catch (err) {
+      console.error("Delete UI error:", err);
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteConfirm(false);
+    }
+  };
+
 
   const handleAddComment = async (content, isAnonymous) => {
     if (!content.trim() || !token) return;
@@ -80,20 +101,43 @@ const UserPostModal = ({
     }
   };
 
-  const handleDelete = async () => {
-    if (!token || !isAuthor) return;
+  const handleDeleteCommentClick = (commentId) => {
+    setSelectedCommentId(commentId);
+    setShowDeleteCommentConfirm(true);
+  };
 
-    setIsDeleting(true);
+  const handleConfirmDeleteComment = async () => {
+    if (!selectedCommentId || !token) return;
+
+    const previousComments = comments;
+    const updatedComments = comments.filter((comment) => comment.commentId !== selectedCommentId);
+    setComments(updatedComments); // mise à jour optimiste UI
+
+    if (onUpdate) {
+      const updatedPost = {
+        ...post,
+        comments: updatedComments,
+      };
+      onUpdate(updatedPost);
+    }
+
+    setIsDeletingComment(true);
     try {
-      await onDelete(post.idPost);
-      onClose();
+      await deleteComment(post.idPost, selectedCommentId, token);
     } catch (err) {
-      console.error("Delete UI error:", err);
+      console.error("Failed to delete comment:", err);
+      setComments(previousComments); // rollback en cas d'erreur
+      if (onUpdate) {
+        onUpdate(post);
+      }
     } finally {
-      setIsDeleting(false);
-      setShowDeleteConfirm(false);
+      setIsDeletingComment(false);
+      setShowDeleteCommentConfirm(false);
+      setSelectedCommentId(null);
     }
   };
+
+ 
 
   const openUpdateModal = (e) => {
     e?.stopPropagation();
@@ -178,7 +222,7 @@ const UserPostModal = ({
               ) : comments.length > 0 ? (
                 <div className="space-y-4 max-h-[30vh] overflow-y-auto py-6">
                   {comments.map((comment) => (
-                    <CommentCard key={comment.commentId} comment={comment} />
+                    <CommentCard key={comment.commentId} comment={comment} onDelete={handleDeleteCommentClick}/>
                   ))}
                 </div>
               ) : (
@@ -213,6 +257,15 @@ const UserPostModal = ({
         title="Delete Post"
         message="Are you sure you want to delete this post? This action cannot be undone."
         isProcessing={isDeleting}
+      />
+
+      <ConfirmationModal
+        isOpen={showDeleteCommentConfirm}
+        onClose={() => setShowDeleteCommentConfirm(false)}
+        onConfirm={handleConfirmDeleteComment}
+        title="Delete Comment"
+        message="Are you sure you want to delete this comment? This action cannot be undone."
+        isProcessing={isDeletingComment}
       />
     </>
   );

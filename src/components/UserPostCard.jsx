@@ -2,6 +2,7 @@
 import { ClockIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router";
 import { likePost } from "../services/postService";
 import { formatDate } from "../utils/function";
 import Avatar from "./Avatar";
@@ -20,8 +21,11 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
   const [isLikeLoading, setIsLikeLoading] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  
 
   const isAuthor = user?.id === post?.author.id;
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (post) {
@@ -30,6 +34,17 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
       setLikeCount(post.likes?.length || 0);
     }
   }, [post, user]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const openPostId = params.get("post");
+
+    if (openPostId && String(openPostId) === String(post?.idPost)) {
+      setIsModalOpen(true);
+    } else {
+      setIsModalOpen(false);
+    }
+  }, [location.search, post?.idPost]);
 
   const handleLike = async (e) => {
     e?.stopPropagation();
@@ -82,11 +97,22 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
     }
   };
 
+ 
+
   const openModal = (e) => {
     e?.stopPropagation();
+    const params = new URLSearchParams(location.search);
+    params.set("post", post.idPost);
+    navigate({ pathname: location.pathname, search: params.toString() }, { replace: true });
     setIsModalOpen(true);
   };
 
+  const closeModal = () => {
+    const params = new URLSearchParams(location.search);
+    params.delete("post");
+    navigate({ pathname: location.pathname, search: params.toString() }, { replace: true });
+    setIsModalOpen(false);
+  };
   const openUpdateModal = (e) => {
     e?.stopPropagation();
     setIsUpdateModalOpen(true);
@@ -159,7 +185,7 @@ const UserPostCard = ({ post, onUpdate, onDelete }) => {
           likeCount={likeCount}
           isLikeLoading={isLikeLoading}
           onLike={handleLike}
-          onClose={() => setIsModalOpen(false)}
+          onClose={closeModal}
           onUpdate={onUpdate}
           onDelete={onDelete}
         />
