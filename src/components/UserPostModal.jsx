@@ -148,7 +148,7 @@ const UserPostModal = ({
     <>
       <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 h-screen">
         <div className="bg-white dark:bg-slate-800 rounded-lg max-w-2xl w-full max-h-[90vh] flex flex-col">
-          <div className="p-6 overflow-y-hidden flex-grow">
+          <div className="p-6 overflow-y-hidden grow">
             <header className="flex justify-between items-start mb-4">
               <h2 className="text-xl font-bold dark:text-white">
                 Post #{post.idPost}
